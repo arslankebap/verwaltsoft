@@ -5,11 +5,14 @@
  */
 package myPackage;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 
 
 /**
@@ -23,7 +26,7 @@ public class Desktop extends javax.swing.JFrame {
      */
     public Desktop() {
         initComponents();
-        setTitle("ARSLAN KEBAP GmbH & Co.KG // Version 0.2.2");
+        setTitle("ARSLAN KEBAP GmbH & Co.KG // Version 0.2.5");
         Auswahlmenu auswahlmenu = new Auswahlmenu();
         titel_aller_offenen_fenster.add("auswahlmenu");
     }
@@ -185,6 +188,10 @@ public class Desktop extends javax.swing.JFrame {
 //        }
         //</editor-fold>
 
+        UIDefaults defaults = UIManager.getLookAndFeelDefaults();
+        if (defaults.get("Table.alternateRowColor") == null)
+        defaults.put("Table.alternateRowColor", new Color(240, 240, 240));
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

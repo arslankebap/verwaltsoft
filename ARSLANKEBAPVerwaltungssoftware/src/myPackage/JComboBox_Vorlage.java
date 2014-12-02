@@ -13,13 +13,14 @@ import javax.swing.JOptionPane;
  *
  * @author SEAMAC
  */
-public class JComboBox_Vorlage {
-    
-    public static JComboBox mitAnweisung(java.lang.String sql_anweisung,java.lang.String spaltenname){
-        JComboBox jcombobox = new JComboBox();
+public class JComboBox_Vorlage extends javax.swing.JComboBox {
+        static JComboBox jcombobox;
         
+        
+    public static JComboBox mitAnweisung(java.lang.String sql_anweisung,java.lang.String spaltenname){
+            jcombobox = new JComboBox();
         try {
-            ResultSet resultset = MySQLVerbindung.mySQLResultSet_aus_Anweisung(sql_anweisung);
+            ResultSet resultset = MySQL.mySQLResultSet_aus_Anweisung(sql_anweisung);
             
             while (resultset.next()) {
                 String name = resultset.getString(spaltenname);
@@ -30,11 +31,29 @@ public class JComboBox_Vorlage {
 
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "JBomboBox_Vorlage (Konstruktor): \n"+e);
+            JOptionPane.showMessageDialog(null, "Fehler in JComboBox_Vorlage: \n"+e);
             return null;
         }
         
         
+    }
+    
+    public static void JComboBox_refreshen(JComboBox jcombo, java.lang.String sql_anweisung,java.lang.String spaltenname){
+         try {
+            jcombo.removeAll();
+            ResultSet resultset = MySQL.mySQLResultSet_aus_Anweisung(sql_anweisung);
+                       
+            while (resultset.next()) {
+                String name = resultset.getString(spaltenname);
+                jcombo.addItem(name);
+            }
+
+
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Fehler beim updaten einer ComboBox: \n"+e);
+
+        }
     }
     
 }

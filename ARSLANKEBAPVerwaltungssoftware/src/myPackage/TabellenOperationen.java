@@ -36,9 +36,9 @@ public class Tabellenoperationen {
     public static void JTable_refreshen(JTable JTabelle, String sql_anweisung) {
         try {
             
-            mySQLresultset = MySQLVerbindung.mySQLResultSet_aus_Anweisung(sql_anweisung);
+            mySQLresultset = MySQL.mySQLResultSet_aus_Anweisung(sql_anweisung);
             JTabelle.setModel(DbUtils.resultSetToTableModel(mySQLresultset));
-            //MySQLVerbindung.mySQLVerbindungBeenden();
+
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Tabelle konnte nicht refreshed werden:\n" + e);

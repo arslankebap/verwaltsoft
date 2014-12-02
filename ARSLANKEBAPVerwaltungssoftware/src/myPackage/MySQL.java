@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author SEAMAC
  */
-public class MySQLVerbindung {
+public class MySQL {
 
     static Connection mySQLverbindung;
     static PreparedStatement mySQL_prepared_statement = null;
@@ -25,6 +25,18 @@ public class MySQLVerbindung {
     static String db = "phpmyadmin";
     static String user = "root";
     static String pw = "a123456n";
+
+    public static void NurAnweisungAnDatenbank(String sql_anweisung) {
+        try {
+            mySQLverbindung = MySQL.mySQLVerbindungAufbauen();
+            PreparedStatement mySQL_prepared_statement = mySQLverbindung.prepareStatement(sql_anweisung);
+            mySQL_prepared_statement.execute();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Datenbankanweisung nicht ausgefuehrt. Fehler:\n" + e);
+        }
+    
+    }
 
     public static Connection mySQLVerbindungAufbauen() {
         try {
@@ -34,7 +46,7 @@ public class MySQLVerbindung {
             //return mySQLverbindung;
             return mySQLverbindung;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "mySQLVerbindungAufbauen:\n" + e);
+            JOptionPane.showMessageDialog(null, "Datenbankverbindung nicht moeglich:\n" + e);
             return null;
         }
     }
@@ -61,29 +73,28 @@ public class MySQLVerbindung {
 
     public static void mySQLVerbindungBeenden() {
         try {
-            
+
             mySQLverbindung.close();
             mySQL_prepared_statement.close();
 
             //JOptionPane.showMessageDialog(null, "Verbindung zu Datenbankserver aufgebaut");
             //return mySQLverbindung;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "mySQLVerbindungBeenden: \n"+e);
+            JOptionPane.showMessageDialog(null, "mySQLVerbindungBeenden: \n" + e);
         }
     }
 
     public static ResultSet mySQLResultSet_aus_Anweisung(String sql_anweisung) {
         try {
-            mySQLverbindung = MySQLVerbindung.mySQLVerbindungAufbauen();
+            mySQLverbindung = MySQL.mySQLVerbindungAufbauen();
             PreparedStatement mySQL_prepared_statement = mySQLverbindung.prepareStatement(sql_anweisung);
             ResultSet mySQLresultset = mySQL_prepared_statement.executeQuery();
             return mySQLresultset;
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "mySQLResultSet_aus_Anweisung: \n"+e);
+            JOptionPane.showMessageDialog(null, "mySQLResultSet_aus_Anweisung: \n" + e);
             return null;
         }
     }
-
 
 }
