@@ -1,7 +1,10 @@
 package myPackage;
 
+import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JFrame;
+import javax.swing.border.LineBorder;
 
 public class Auswahlmenu extends javax.swing.JInternalFrame {
 
@@ -531,16 +534,19 @@ public class Auswahlmenu extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel42MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MouseClicked
+        //jLabel42.setOpaque(false);
         Zahlungsverfolgung zahlungsverfolgung_frame = new Zahlungsverfolgung();        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel42MouseClicked
 
     private void jLabel42MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MousePressed
-
+            //jLabel42.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+            //jLabel42.setOpaque(false);
+;
        // jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/money_bag-512_128.png")));      // TODO add your handling code here:
     }//GEN-LAST:event_jLabel42MousePressed
 
     private void jLabel42MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MouseReleased
-
+            //jLabel42.setOpaque(true);
     }//GEN-LAST:event_jLabel42MouseReleased
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
