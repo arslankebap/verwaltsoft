@@ -1,5 +1,6 @@
 package myPackage;
 
+import javax.swing.Icon;
 import javax.swing.JFrame;
 
 public class Auswahlmenu extends javax.swing.JInternalFrame {
@@ -123,6 +124,11 @@ public class Auswahlmenu extends javax.swing.JInternalFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/User_Testing-512_128.png"))); // NOI18N
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/shop_supermarket_store_facade_market_shopping_retail_building_commerce_cafe_local_storefront_restaurant_flat_design_icon-512_128.png"))); // NOI18N
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/pricing-table-512_128.png"))); // NOI18N
 
@@ -226,6 +232,12 @@ public class Auswahlmenu extends javax.swing.JInternalFrame {
 
         jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/money-512_128.png"))); // NOI18N
         jLabel42.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel42MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel42MouseReleased(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel42MouseClicked(evt);
             }
@@ -521,6 +533,19 @@ public class Auswahlmenu extends javax.swing.JInternalFrame {
     private void jLabel42MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MouseClicked
         Zahlungsverfolgung zahlungsverfolgung_frame = new Zahlungsverfolgung();        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel42MouseClicked
+
+    private void jLabel42MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MousePressed
+
+       // jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/money_bag-512_128.png")));      // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel42MousePressed
+
+    private void jLabel42MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MouseReleased
+
+    }//GEN-LAST:event_jLabel42MouseReleased
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        KundenFrame kundenFrame= new KundenFrame(); // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel9MouseClicked
 
     /* VORSICHT: BITTE ALLE VARIABLEN bzw. OBJEKTE ALS NULL / NICHT INSTANZIERT HIER DEFINIEREN 
      * DAMIT GARBAGECOLLECTOR LÖSCHT, FALLS JINTERNALFRAME-ERSTELLUNG VON MIR TEILWEISE BLOCKIERT WURDE

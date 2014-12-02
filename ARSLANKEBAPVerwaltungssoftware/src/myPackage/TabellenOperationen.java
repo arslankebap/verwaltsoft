@@ -20,19 +20,28 @@ import net.proteanit.sql.DbUtils;
  *
  * @author SEAMAC
  */
-public class TabellenOperationen {
+public class Tabellenoperationen {
 
-    static Connection mySQLverbindung = mySQLVerbindungAufbauen.mySQLVerbindungAufbauen("192.168.179.71","phpmyadmin","root","a123456n");
-    static PreparedStatement mySQL_prepared_statement;
+    //Eine mySQL-Verbindung zur Datenbank aufbauen
+    
     static ResultSet mySQLresultset;
+    
+    public static JTable JTable_erzeugen(String sql_anweisung){
+        JTable jtable = new JTable();
+        JTable_refreshen(jtable,sql_anweisung);
+        return jtable;
+    }
+    
     
     public static void JTable_refreshen(JTable JTabelle, String sql_anweisung) {
         try {
-            mySQL_prepared_statement = mySQLverbindung.prepareStatement(sql_anweisung);
-            mySQLresultset = mySQL_prepared_statement.executeQuery();
+            
+            mySQLresultset = MySQLVerbindung.mySQLResultSet_aus_Anweisung(sql_anweisung);
             JTabelle.setModel(DbUtils.resultSetToTableModel(mySQLresultset));
+            //MySQLVerbindung.mySQLVerbindungBeenden();
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Tabelle " + JTabelle + " konnte nicht refreshed werden:\n" + e);
+            JOptionPane.showMessageDialog(null, "Tabelle konnte nicht refreshed werden:\n" + e);
         }
     }
 
