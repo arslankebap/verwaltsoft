@@ -13,14 +13,14 @@ import javax.swing.JOptionPane;
  *
  * @author SEAMAC
  */
-public class JComboBox_Vorlage extends javax.swing.JComboBox {
-        static JComboBox jcombobox;
+public class Operationen_JComboBox {
+
         
         
     public static JComboBox mitAnweisung(java.lang.String sql_anweisung,java.lang.String spaltenname){
-            jcombobox = new JComboBox();
+            JComboBox jcombobox = new JComboBox();
         try {
-            ResultSet resultset = MySQL.mySQLResultSet_aus_Anweisung(sql_anweisung);
+            ResultSet resultset = Operationen_MySQL.ResultSet_aus_Anweisung(sql_anweisung);
             
             while (resultset.next()) {
                 String name = resultset.getString(spaltenname);
@@ -38,16 +38,18 @@ public class JComboBox_Vorlage extends javax.swing.JComboBox {
         
     }
     
-    public static void JComboBox_refreshen(JComboBox jcombo, java.lang.String sql_anweisung,java.lang.String spaltenname){
+    public static void refreshen(JComboBox jcombo, java.lang.String sql_anweisung,java.lang.String spaltenname){
          try {
-            jcombo.removeAll();
-            ResultSet resultset = MySQL.mySQLResultSet_aus_Anweisung(sql_anweisung);
-                       
+            jcombo.removeAllItems();
+            ResultSet resultset = Operationen_MySQL.ResultSet_aus_Anweisung(sql_anweisung);
+            
+            
             while (resultset.next()) {
                 String name = resultset.getString(spaltenname);
                 jcombo.addItem(name);
             }
-
+            jcombo.validate();
+            jcombo.repaint();
 
 
         } catch (Exception e) {

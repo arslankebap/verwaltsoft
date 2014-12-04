@@ -5,13 +5,10 @@ import com.sun.glass.events.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
-public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
+public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
 
     static int openFrameCount = 0;
     static int xOffset = 30, yOffset = 30;
@@ -20,7 +17,8 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
     /**
      * Creates new form NewJInternalFrame_1
      */
-    public Zahlungsverfolgung() {
+    public Frame_Zahlungsverfolgung() {
+
         initComponents();
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         setVisible(true);
@@ -46,12 +44,13 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = JComboBox_Vorlage.mitAnweisung("SELECT * FROM Kunden","Kundenname");
+        jComboBox1 = myPackage.Operationen_JComboBox.mitAnweisung("SELECT * FROM Kunden","Kundenname");
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        String standard_sql_jTable3 = "SELECT * FROM phpmyadmin.Zahlungsverfolgung WHERE 'OffenerBetrag'>'0.00';";
+        jTable3 = myPackage.Operationen_JTable.JTable_erzeugen(standard_sql_jTable3);
         jLabel10 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -62,13 +61,13 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox2 = JComboBox_Vorlage.mitAnweisung("SELECT * FROM phpmyadmin.Zahlungsverfolgung","Rechnungsnummer");
+        jComboBox2 = myPackage.Operationen_JComboBox.mitAnweisung("SELECT * FROM phpmyadmin.Zahlungsverfolgung","Rechnungsnummer");
         jButton2 = new javax.swing.JButton();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel5 = myPackage.Operationen_JLabel.summiereFloatsAusDBSpalte(standard_sql_jTable3,"Bruttorechnungsbetrag");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,7 +128,7 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
     );
     // Um Gui-Editor und gleichzeitig deutlich mehr freiheit zu haben:
     String standard_sql_jTable2 = "SELECT * FROM phpmyadmin.Zahlungsverfolgung_Teilzahlungen;";
-    jTable2 = Tabellenoperationen.JTable_erzeugen(standard_sql_jTable2);
+    jTable2 = myPackage.Operationen_JTable.JTable_erzeugen(standard_sql_jTable2);
     jScrollPane3.setViewportView(jTable2);
 
     jScrollPane4.setBackground(new java.awt.Color(204, 204, 204));
@@ -137,21 +136,9 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
 
     jTable3.setAutoCreateRowSorter(true);
     jTable3.setBackground(new java.awt.Color(204, 204, 204));
-    jTable3.setModel(new javax.swing.table.DefaultTableModel(
-        new Object [][] {
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null}
-        },
-        new String [] {
-            "Title 1", "Title 2", "Title 3", "Title 4"
-        } // Nicht editierbarkeit:
-    )
-    );
+    jTable3.setName(""); // NOI18N
+    jTable3.setShowGrid(true);
     // Um Gui-Editor und gleichzeitig deutlich mehr freiheit zu haben:
-    String standard_sql_jTable3 = "SELECT * FROM phpmyadmin.Zahlungsverfolgung WHERE 'Offener Bruttobetrag'>= 0.00;";
-    jTable3 = Tabellenoperationen.JTable_erzeugen(standard_sql_jTable3);
     jScrollPane4.setViewportView(jTable3);
 
     jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/plus-32-weiss.png"))); // NOI18N
@@ -211,6 +198,11 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
     jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             jButton1MouseClicked(evt);
+        }
+    });
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton1ActionPerformed(evt);
         }
     });
 
@@ -294,6 +286,8 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
     jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
     jLabel5.setForeground(java.awt.Color.orange);
     jLabel5.setText("0.00");
+    jLabel5.setToolTipText("");
+    jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -308,8 +302,8 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(jLabel3)
-                            .addGap(47, 47, 47)
-                            .addComponent(jLabel5)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(0, 0, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -458,10 +452,10 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-            // Neuen Eintrag in die Tabelle 'Zahlungsverfolgung' nach Kontrolle auf Formatierung:
+            // Neuen Eintrag in die Tabelle 'Frame_Zahlungsverfolgung' nach Kontrolle auf Formatierung:
             if (InputVerifier2Nachkommastellen.verifizieren(jTextField2) && InputVerifier2Nachkommastellen.verifizieren(jTextField6) && InputVerifier2Nachkommastellen.verifizieren(jTextField7) && InputVerifier2Nachkommastellen.verifizieren(jTextField8)) {
 
-                Connection conn1 = MySQL.mySQLverbindung; // Unsere bestehende Verbindung aus Klasse MySQL nutzen
+                Connection conn1 = Operationen_MySQL.mySQLverbindung; // Unsere bestehende Verbindung aus Klasse Operationen_MySQL nutzen
                 PreparedStatement mySQL_prepared_statement = conn1.prepareStatement("INSERT INTO phpmyadmin.Zahlungsverfolgung "
                         + "(Kundenname, Rechnungsnummer, Bruttorechnungsbetrag, OffenerBetrag, Gewicht1, Gewicht2, Gewicht3) "
                         + "VALUES (?,?,?,?,?,?,?)");
@@ -476,31 +470,27 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
 
                 mySQL_prepared_statement.execute();
 
-                // Komponenten aktualisieren, damit neuer Eintrag gleich sicht- und nutzbar
-                Tabellenoperationen.JTable_refreshen(jTable3, "SELECT * FROM Zahlungsverfolgung WHERE 'Offener Bruttobetrag'>= 0.00;");
-                Tabellenoperationen.JTable_refreshen(jTable2, "SELECT * FROM Zahlungsverfolgung_Teilzahlungen;");
-                JComboBox_Vorlage.JComboBox_refreshen(jComboBox2, "SELECT * FROM phpmyadmin.Zahlungsverfolgung","Rechnungsnummer");
-                
+                // Betroffene Komponenten aktualisieren oder leeren
+                Operationen_JTable.refreshen(jTable3, "SELECT * FROM phpmyadmin.Zahlungsverfolgung WHERE 'OffenerBetrag' > '0.00';");
+//                Operationen_JTable.refreshen(jTable3, "SELECT * FROM phpmyadmin.Zahlungsverfolgung WHERE 'OffenerBetrag' > '0.00';");
+//                jScrollPane4.setViewportView(jTable3);
+                Operationen_JComboBox.refreshen(jComboBox2, "SELECT * FROM phpmyadmin.Zahlungsverfolgung", "Rechnungsnummer");
                 jTextField1.setText("");
                 jTextField2.setText("");
                 jTextField6.setText("");
                 jTextField7.setText("");
                 jTextField8.setText("");
-                
-                //SwingUtilities.updateComponentTreeUI(this);
-
-
-                Runnable runnable = new Runnable() {
-                    public void run() {
-                        
-                        initComponents();
-                    }
-                };
-                runnable.run();
-                this.invalidate();
-                this.validate();
-                this.repaint();
-
+                JOptionPane.showMessageDialog(null, "Offene Rechnung erfolgreich in Netzwerkdatenbank eingetragen!", 
+                                              "ARSLAN KEBAP DATENBANK", JOptionPane.INFORMATION_MESSAGE, 
+                                              new ImageIcon(getClass().getResource("/myPackage/bilder/Netzwerkserver-128.png")));
+//                Fehlgeschlagener Versuch alle Komponenten auf einmal zu "refreshen" (ohne refresh-Methoden nutzen zu müssen):
+//                SwingUtilities.updateComponentTreeUI(this);
+//                Runnable runnable = new Runnable() {public void run() {initComponents();}};
+//                runnable.run();
+//                this.invalidate();
+//                this.validate();
+//                this.revalidate();
+//                this.repaint();
             } else {
                 JOptionPane.showMessageDialog(null, "Eingaben kontrollieren!");
             }
@@ -515,7 +505,11 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton1MouseClicked
 
-    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -536,10 +530,10 @@ public class Zahlungsverfolgung extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    public javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    public javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField6;

@@ -1,12 +1,8 @@
 package myPackage;
 
-import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.JFrame;
-import javax.swing.border.LineBorder;
 
-public class Auswahlmenu extends javax.swing.JInternalFrame {
+public class Frame_Auswahlmenue extends javax.swing.JInternalFrame {
 
     static int openFrameCount = 9;
     static int xOffset= 30, yOffset= 20;
@@ -14,7 +10,7 @@ public class Auswahlmenu extends javax.swing.JInternalFrame {
     
     
     /** Creates new form NewJInternalFrame_1 */
-    public Auswahlmenu() {
+    public Frame_Auswahlmenue() {
             initComponents();
             setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
             setVisible(true);
@@ -521,7 +517,7 @@ public class Auswahlmenu extends javax.swing.JInternalFrame {
     }//GEN-END:initComponents
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        JFrame FileTreeFrame_JFrame = FileTreeFrame.FileTreeFrame_erzeugen("/Users/SEAMAC/Dropbox/");
+        JFrame FileTreeFrame_JFrame = Frame_FileTree.FileTreeFrame_erzeugen("/Users/SEAMAC/Dropbox/");
         FileTreeFrame_JFrame.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseClicked
 
@@ -535,7 +531,7 @@ public class Auswahlmenu extends javax.swing.JInternalFrame {
 
     private void jLabel42MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MouseClicked
         //jLabel42.setOpaque(false);
-        Zahlungsverfolgung zahlungsverfolgung_frame = new Zahlungsverfolgung();        // TODO add your handling code here:
+        Frame_Zahlungsverfolgung zahlungsverfolgung_frame = new Frame_Zahlungsverfolgung();        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel42MouseClicked
 
     private void jLabel42MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MousePressed
@@ -550,7 +546,7 @@ public class Auswahlmenu extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel42MouseReleased
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        KundenFrame kundenFrame= new KundenFrame(); // TODO add your handling code here:
+        //Frame_Kundenverwaltung kundenFrame= new Frame_Kundenverwaltung(); // TODO add your handling code here:
     }//GEN-LAST:event_jLabel9MouseClicked
 
     /* VORSICHT: BITTE ALLE VARIABLEN bzw. OBJEKTE ALS NULL / NICHT INSTANZIERT HIER DEFINIEREN 

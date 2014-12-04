@@ -66,8 +66,8 @@
                               <Component id="jLabel1" min="-2" pref="142" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel5" min="-2" pref="83" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -206,7 +206,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="JComboBox_Vorlage.mitAnweisung(&quot;SELECT * FROM Kunden&quot;,&quot;Kundenname&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="myPackage.Operationen_JComboBox.mitAnweisung(&quot;SELECT * FROM Kunden&quot;,&quot;Kundenname&quot;)"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -238,7 +238,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Um Gui-Editor und gleichzeitig deutlich mehr freiheit zu haben:&#xa;String standard_sql_jTable2 = &quot;SELECT * FROM phpmyadmin.Zahlungsverfolgung_Teilzahlungen;&quot;;&#xa;jTable2 = Tabellenoperationen.JTable_erzeugen(standard_sql_jTable2);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Um Gui-Editor und gleichzeitig deutlich mehr freiheit zu haben:&#xa;String standard_sql_jTable2 = &quot;SELECT * FROM phpmyadmin.Zahlungsverfolgung_Teilzahlungen;&quot;;&#xa;jTable2 = myPackage.Operationen_JTable.JTable_erzeugen(standard_sql_jTable2);"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -253,6 +253,7 @@
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
@@ -265,11 +266,22 @@
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        {null, null, null, null},&#xa;        {null, null, null, null},&#xa;        {null, null, null, null},&#xa;        {null, null, null, null}&#xa;    },&#xa;    new String [] {&#xa;        &quot;Title 1&quot;, &quot;Title 2&quot;, &quot;Title 3&quot;, &quot;Title 4&quot;&#xa;    } // Nicht editierbarkeit:&#xa;)&#xa;" type="code"/>
+              <SerializedValue value="-84,-19,0,5,115,114,0,64,111,114,103,46,110,101,116,98,101,97,110,115,46,109,111,100,117,108,101,115,46,102,111,114,109,46,101,100,105,116,111,114,115,50,46,84,97,98,108,101,77,111,100,101,108,69,100,105,116,111,114,36,78,98,84,97,98,108,101,77,111,100,101,108,-95,8,-65,-35,21,111,108,-106,12,0,0,120,114,0,36,106,97,118,97,120,46,115,119,105,110,103,46,116,97,98,108,101,46,65,98,115,116,114,97,99,116,84,97,98,108,101,77,111,100,101,108,114,-53,-21,56,-82,1,-1,-66,2,0,1,76,0,12,108,105,115,116,101,110,101,114,76,105,115,116,116,0,37,76,106,97,118,97,120,47,115,119,105,110,103,47,101,118,101,110,116,47,69,118,101,110,116,76,105,115,116,101,110,101,114,76,105,115,116,59,120,112,119,8,0,0,0,0,0,0,0,0,117,114,0,19,91,76,106,97,118,97,46,108,97,110,103,46,83,116,114,105,110,103,59,-83,-46,86,-25,-23,29,123,71,2,0,0,120,112,0,0,0,0,117,114,0,2,91,90,87,-113,32,57,20,-72,93,-30,2,0,0,120,112,0,0,0,0,120"/>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="" noResource="true"/>
+            <Property name="showGrid" type="boolean" value="true"/>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Um Gui-Editor und gleichzeitig deutlich mehr freiheit zu haben:&#xa;String standard_sql_jTable3 = &quot;SELECT * FROM phpmyadmin.Zahlungsverfolgung WHERE &apos;Offener Bruttobetrag&apos;&gt;= 0.00;&quot;;&#xa;jTable3 = Tabellenoperationen.JTable_erzeugen(standard_sql_jTable3);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="myPackage.Operationen_JTable.JTable_erzeugen(standard_sql_jTable3)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="String standard_sql_jTable3 = &quot;SELECT * FROM phpmyadmin.Zahlungsverfolgung WHERE &apos;OffenerBetrag&apos;&gt;&apos;0.00&apos;;&quot;;"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Um Gui-Editor und gleichzeitig deutlich mehr freiheit zu haben:"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -401,6 +413,7 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
@@ -427,7 +440,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="JComboBox_Vorlage.mitAnweisung(&quot;SELECT * FROM phpmyadmin.Zahlungsverfolgung&quot;,&quot;Rechnungsnummer&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="myPackage.Operationen_JComboBox.mitAnweisung(&quot;SELECT * FROM phpmyadmin.Zahlungsverfolgung&quot;,&quot;Rechnungsnummer&quot;)"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
@@ -566,7 +579,12 @@
           <Color blue="0" green="c8" id="orange" palette="1" red="ff" type="palette"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0.00"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="horizontalTextPosition" type="int" value="2"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="myPackage.Operationen_JLabel.summiereFloatsAusDBSpalte(standard_sql_jTable3,&quot;Bruttorechnungsbetrag&quot;)"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

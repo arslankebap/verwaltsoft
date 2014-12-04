@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author SEAMAC
  */
-public class MySQL {
+public class Operationen_MySQL {
 
     static Connection mySQLverbindung;
     static PreparedStatement mySQL_prepared_statement = null;
@@ -26,19 +26,19 @@ public class MySQL {
     static String user = "root";
     static String pw = "a123456n";
 
-    public static void NurAnweisungAnDatenbank(String sql_anweisung) {
+    public static void AnweisungSenden(String sql_anweisung) {
         try {
-            mySQLverbindung = MySQL.mySQLVerbindungAufbauen();
+            mySQLverbindung = Operationen_MySQL.VerbindungAufbauen();
             PreparedStatement mySQL_prepared_statement = mySQLverbindung.prepareStatement(sql_anweisung);
             mySQL_prepared_statement.execute();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Datenbankanweisung nicht ausgefuehrt. Fehler:\n" + e);
+            JOptionPane.showMessageDialog(null, "Operationen_MySQL.AnweisungSenden() nicht richtig ausgefuehrt:\n" + e);
         }
     
     }
 
-    public static Connection mySQLVerbindungAufbauen() {
+    public static Connection VerbindungAufbauen() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             mySQLverbindung = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + db + "?user=" + user + "&password=" + pw);
@@ -52,7 +52,7 @@ public class MySQL {
     }
 
     //Falls mal aus irgeneinem Grund schnell eine alternative IP etc. gebraucht wird:
-    public static Connection mySQLVerbindungAufbauen(String ip, String db, String user, String pw) {
+    public static Connection VerbindungAufbauen(String ip, String db, String user, String pw) {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             mySQLverbindung = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + db + "?user=" + user + "&password=" + pw);
@@ -71,7 +71,7 @@ public class MySQL {
         }
     }
 
-    public static void mySQLVerbindungBeenden() {
+    public static void VerbindungBeenden() {
         try {
 
             mySQLverbindung.close();
@@ -84,11 +84,11 @@ public class MySQL {
         }
     }
 
-    public static ResultSet mySQLResultSet_aus_Anweisung(String sql_anweisung) {
+    public static ResultSet ResultSet_aus_Anweisung(String sql_anweisung) {
         try {
-            mySQLverbindung = MySQL.mySQLVerbindungAufbauen();
-            PreparedStatement mySQL_prepared_statement = mySQLverbindung.prepareStatement(sql_anweisung);
-            ResultSet mySQLresultset = mySQL_prepared_statement.executeQuery();
+            mySQLverbindung = Operationen_MySQL.VerbindungAufbauen();
+            PreparedStatement ps = mySQLverbindung.prepareStatement(sql_anweisung);
+            ResultSet mySQLresultset = ps.executeQuery();
             return mySQLresultset;
 
         } catch (Exception e) {

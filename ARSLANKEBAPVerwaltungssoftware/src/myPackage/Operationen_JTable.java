@@ -1,7 +1,5 @@
 package myPackage;
 
-
-
 import java.awt.BorderLayout;
 import java.sql.*;
 import javax.swing.JFrame;
@@ -20,26 +18,41 @@ import net.proteanit.sql.DbUtils;
  *
  * @author SEAMAC
  */
-public class Tabellenoperationen {
+public class Operationen_JTable extends JTable{
+    
+    //Eine mySQL-Verbindung zur Datenbank aufbaue
 
-    //Eine mySQL-Verbindung zur Datenbank aufbauen
-    
-    static ResultSet mySQLresultset;
-    
-    public static JTable JTable_erzeugen(String sql_anweisung){
+    public static JTable JTable_erzeugen(String sql_anweisung) {
+
+        /*       Mit dem folgenden Code würden wir normalerweise die JTable uneditierbar machen...
+         *        Da aber später in refreshen() das TableModel neu gesettet wird (mit mysql-resultset-daten) 
+         *        und ein anschließendes setten mit einem DefaultTableModel nicht richtig funktioniert, verzichte ich 
+         *        notgedrungen z.Z. auf die "Nichteditierbarkeit" da die tatsächlichen Daten in der Datenbank durch  
+         *        die JTable-Veränderungen sowieso nicht editiert werden. Trotzdem: Muss gelöst werden!
+         *
+         *        DefaultTableModel model = new DefaultTableModel() {
+         *            @Override
+         *            public boolean isCellEditable(int rowIndex, int mColIndex) {
+         *                return false;
+         *            }
+         *        };
+         *        JTable jtable = new JTable(model);
+         */
         JTable jtable = new JTable();
-        JTable_refreshen(jtable,sql_anweisung);
+        refreshen(jtable, sql_anweisung);
+
         return jtable;
     }
-    
-    
-    public static void JTable_refreshen(JTable JTabelle, String sql_anweisung) {
-        try {
-            
-            mySQLresultset = MySQL.mySQLResultSet_aus_Anweisung(sql_anweisung);
-            JTabelle.setModel(DbUtils.resultSetToTableModel(mySQLresultset));
 
+    public static void refreshen(JTable JTabelle, String sql_anweisung) {
+        try {
+
+            ResultSet mySQLresultset = Operationen_MySQL.ResultSet_aus_Anweisung(sql_anweisung);
+//            JTabelle.removeAll();
+//            JTabelle.revalidate();
+            JTabelle.setModel(DbUtils.resultSetToTableModel(mySQLresultset));
             
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Tabelle konnte nicht refreshed werden:\n" + e);
         }
@@ -77,9 +90,8 @@ public class Tabellenoperationen {
 
     }
 
-
-        // Man muss die JScrollPane nur zu einem JFrame adden und schon hat man eine Fenster welches die mySQL-Tabelle anzeigt:
-        public static JScrollPane JTableJScrollPane_erzeugen(String NameDerSQLTabelle, String SQL_anweisung) {
+    // Man muss die JScrollPane nur zu einem JFrame adden und schon hat man eine Fenster welches die mySQL-Tabelle anzeigt:
+    public static JScrollPane JTableJScrollPane_erzeugen(String NameDerSQLTabelle, String SQL_anweisung) {
         JScrollPane jSPane = new JScrollPane();
         JTable JTabelle1 = new JTable();
         JTabelle1.setAutoCreateRowSorter(true);
@@ -103,9 +115,9 @@ public class Tabellenoperationen {
         jSPane.setViewportView(JTabelle1);
         // JTable mit SQL-Anweisung refreshen:
         jSPane.setViewportView(JTabelle1);
-        JTable_refreshen(JTabelle1, SQL_anweisung);
+        refreshen(JTabelle1, SQL_anweisung);
         //myWindow.setPreferredSize(new Dimension(preferred_width, preferred_height));
         return jSPane;
     }
-    
+
 }

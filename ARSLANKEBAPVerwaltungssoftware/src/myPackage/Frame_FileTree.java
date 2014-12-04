@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
@@ -16,7 +15,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
  
-public class FileTreeFrame extends JFrame {
+public class Frame_FileTree extends JFrame {
 
 
 

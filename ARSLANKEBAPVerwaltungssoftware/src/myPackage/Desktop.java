@@ -6,11 +6,7 @@
 package myPackage;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyVetoException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 
@@ -26,9 +22,8 @@ public class Desktop extends javax.swing.JFrame {
      */
     public Desktop() {
         initComponents();
-        setTitle("ARSLAN KEBAP GmbH & Co.KG // Version 0.2.5");
-        Auswahlmenu auswahlmenu = new Auswahlmenu();
-        titel_aller_offenen_fenster.add("auswahlmenu");
+        setTitle("ARSLAN KEBAP GmbH & Co.KG // Version 0.2.6");
+        Frame_Auswahlmenue auswahlmenu = new Frame_Auswahlmenue();
     }
 
     /**
@@ -152,8 +147,7 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-            Auswahlmenu auswahlmenu = new Auswahlmenu();
-            titel_aller_offenen_fenster.add("auswahlmenu"); // hilft mir spaeter um Anzahl Instanzierungen zu regeln
+            Frame_Auswahlmenue auswahlmenu = new Frame_Auswahlmenue();
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed

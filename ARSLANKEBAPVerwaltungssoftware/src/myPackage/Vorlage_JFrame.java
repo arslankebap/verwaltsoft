@@ -1,27 +1,27 @@
 package myPackage;
-public class Lagerverwaltung extends javax.swing.JInternalFrame {
 
+public class Vorlage_JFrame extends javax.swing.JInternalFrame {
+    
+    // Sorgt fuer Offset jeden weiteren neu geöffneten Fensters
     static int openFrameCount = 0;
-    static int xOffset= 30, yOffset= 30;
+    static int xOffset = 30, yOffset = 30; 
 
-    
-    
-    /** Creates new form NewJInternalFrame_1 */
-    public Lagerverwaltung() {
-            initComponents();
-            setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
-            setVisible(true);
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            Desktop.desktopPane.add(this);
-            if(openFrameCount == 7) {
-                openFrameCount = 0;
-            } else {
-                openFrameCount++;
-            }
-            try {
-                this.setSelected(true);
-            } catch (java.beans.PropertyVetoException e) {
-            }
+
+    public Vorlage_JFrame() {
+        initComponents();
+        setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
+        setVisible(true);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        Desktop.desktopPane.add(this);
+        if (openFrameCount == 7) {
+            openFrameCount = 0;
+        } else {
+            openFrameCount++;
+        }
+        try {
+            this.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+        }
 
     }
 
@@ -53,5 +53,4 @@ public class Lagerverwaltung extends javax.swing.JInternalFrame {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
 }
