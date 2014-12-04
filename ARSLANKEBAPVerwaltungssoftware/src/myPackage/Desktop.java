@@ -184,7 +184,7 @@ public class Desktop extends javax.swing.JFrame {
 
         UIDefaults defaults = UIManager.getLookAndFeelDefaults();
         if (defaults.get("Table.alternateRowColor") == null)
-        defaults.put("Table.alternateRowColor", new Color(240, 240, 240));
+        defaults.put("Table.alternateRowColor", new Color(230, 230, 230));
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

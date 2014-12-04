@@ -47,10 +47,9 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jComboBox1 = myPackage.Operationen_JComboBox.mitAnweisung("SELECT * FROM Kunden","Kundenname");
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable2 = myPackage.Operationen_JTable.JTable_erzeugen(standard_ansicht_jTable2);
         jScrollPane4 = new javax.swing.JScrollPane();
-        String standard_sql_jTable3 = "SELECT * FROM phpmyadmin.Zahlungsverfolgung WHERE 'OffenerBetrag'>'0.00';";
-        jTable3 = myPackage.Operationen_JTable.JTable_erzeugen(standard_sql_jTable3);
+        jTable3 = myPackage.Operationen_JTable.JTable_erzeugen(standard_ansicht_jTable3);
         jLabel10 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -67,7 +66,19 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = myPackage.Operationen_JLabel.summiereFloatsAusDBSpalte(standard_sql_jTable3,"Bruttorechnungsbetrag");
+        jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jTextField3 = Operationen_JTextField.summiereDBSpalte(letzte_ansicht_jTable3,spaltenname_summenfeld_jTextField3);
+        jTextField4 = Operationen_JTextField.summiereDBSpalte(letzte_ansicht_jTable3,spaltenname_summenfeld_jTextField4);
+        jTextField5 = Operationen_JTextField.summiereDBSpalte(letzte_ansicht_jTable3,spaltenname_summenfeld_jTextField5);
+        jTextField9 = Operationen_JTextField.summiereDBSpalte(letzte_ansicht_jTable3,spaltenname_summenfeld_jTextField9);
+        jTextField10 = Operationen_JTextField.summiereDBSpalte(letzte_ansicht_jTable3,spaltenname_summenfeld_jTextField10);
+        jButton5 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,6 +105,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Offene Rechnungen");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Kunde:");
@@ -110,6 +122,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel4.setForeground(java.awt.Color.white);
         jLabel4.setText("Zahlungseingänge");
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jTable2.setAutoCreateRowSorter(true);
         jTable2.setBackground(new java.awt.Color(153, 204, 255));
@@ -126,16 +139,13 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         )// Nicht editierbarkeit:
 
     );
-    // Um Gui-Editor und gleichzeitig deutlich mehr freiheit zu haben:
-    String standard_sql_jTable2 = "SELECT * FROM phpmyadmin.Zahlungsverfolgung_Teilzahlungen;";
-    jTable2 = myPackage.Operationen_JTable.JTable_erzeugen(standard_sql_jTable2);
     jScrollPane3.setViewportView(jTable2);
 
     jScrollPane4.setBackground(new java.awt.Color(204, 204, 204));
     jScrollPane4.setBorder(null);
 
-    jTable3.setAutoCreateRowSorter(true);
-    jTable3.setBackground(new java.awt.Color(204, 204, 204));
+    jTable3.setBackground(new java.awt.Color(153, 204, 255));
+    jTable3.setForeground(new java.awt.Color(102, 102, 102));
     jTable3.setName(""); // NOI18N
     jTable3.setShowGrid(true);
     // Um Gui-Editor und gleichzeitig deutlich mehr freiheit zu haben:
@@ -192,9 +202,10 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     jLabel15.setForeground(java.awt.Color.white);
     jLabel15.setText("Gewicht 1:");
 
-    jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/plus-32-weiss.png"))); // NOI18N
+    jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/add-32.png"))); // NOI18N
     jButton1.setBorderPainted(false);
     jButton1.setPreferredSize(new java.awt.Dimension(40, 40));
+    jButton1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/add-32-dark.png"))); // NOI18N
     jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             jButton1MouseClicked(evt);
@@ -208,6 +219,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
 
     jLabel9.setForeground(java.awt.Color.white);
     jLabel9.setText("RG-Nr:");
+    jLabel9.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
     jComboBox2.setBackground(new java.awt.Color(204, 204, 204));
     jComboBox2.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
@@ -221,6 +233,11 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     jButton2.setBorderPainted(false);
     jButton2.setPreferredSize(new java.awt.Dimension(40, 40));
     jButton2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/find-32.png"))); // NOI18N
+    jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jButton2MouseClicked(evt);
+        }
+    });
 
     jTextField6.setBackground(new java.awt.Color(153, 153, 153));
     jTextField6.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
@@ -280,14 +297,92 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     });
 
     jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-    jLabel3.setForeground(java.awt.Color.orange);
-    jLabel3.setText("Summe RG-Beträge:");
+    jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+    jLabel3.setText("Summe angez. RG-Beträge:");
+    jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-    jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-    jLabel5.setForeground(java.awt.Color.orange);
-    jLabel5.setText("0.00");
-    jLabel5.setToolTipText("");
-    jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+    jLabel16.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+    jLabel16.setText("Summe offener Beträge:");
+    jLabel16.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+    jLabel18.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+    jLabel18.setText("Summe Gewicht1:");
+    jLabel18.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+    jLabel20.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+    jLabel20.setText("Summe Gewicht2:");
+    jLabel20.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+    jLabel23.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+    jLabel23.setText("Summe Gewicht3:");
+    jLabel23.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+    jButton3.setBackground(null);
+    jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/arrow_circle_left.png"))); // NOI18N
+    jButton3.setBorderPainted(false);
+    jButton3.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/arrow_circle_left_clicked.png"))); // NOI18N
+    jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jButton3MouseClicked(evt);
+        }
+    });
+
+    jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/647702-excel-16.png"))); // NOI18N
+    jButton4.setBorderPainted(false);
+
+    jTextField3.setEditable(false);
+    jTextField3.setBackground(null);
+    jTextField3.setForeground(java.awt.Color.white);
+    jTextField3.setBorder(null);
+    jTextField3.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+
+    jTextField4.setEditable(false);
+    jTextField4.setBackground(null);
+    jTextField4.setForeground(java.awt.Color.white);
+    jTextField4.setBorder(null);
+    jTextField4.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+
+    jTextField5.setEditable(false);
+    jTextField5.setBackground(null);
+    jTextField5.setForeground(java.awt.Color.white);
+    jTextField5.setBorder(null);
+    jTextField5.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+
+    jTextField9.setEditable(false);
+    jTextField9.setBackground(null);
+    jTextField9.setForeground(java.awt.Color.white);
+    jTextField9.setBorder(null);
+    jTextField9.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+
+    jTextField10.setEditable(false);
+    jTextField10.setBackground(null);
+    jTextField10.setForeground(java.awt.Color.white);
+    jTextField10.setBorder(null);
+    jTextField10.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+
+    jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/basics-22-32-weiss.png"))); // NOI18N
+    jButton5.setBorderPainted(false);
+    jButton5.setPreferredSize(new java.awt.Dimension(40, 40));
+    jButton5.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/basics-22-32.png"))); // NOI18N
+    jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jButton5MouseClicked(evt);
+        }
+    });
+    jButton5.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton5ActionPerformed(evt);
+        }
+    });
+
+    jDateChooser1.setBackground(null);
+    jDateChooser1.setAlignmentX(0.0F);
+    jDateChooser1.setAlignmentY(0.0F);
+    jDateChooser1.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -297,66 +392,98 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
             .addGap(22, 22, 22)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel11)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel15)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel13)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel14)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane4))
-                    .addGap(20, 20, 20))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel3)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel16)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel18)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel20)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel23)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane4)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel2)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel11)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel12)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel15)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel13)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel14)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jLabel4)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel10)
                             .addGap(18, 18, 18)
                             .addComponent(jLabel9)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 863, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 976, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGap(20, 20, 20))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addGap(13, 13, 13)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jLabel3)
-                .addComponent(jLabel5))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton4)
+                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -374,7 +501,9 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(18, 18, 18)
             .addComponent(jLabel4)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -387,8 +516,11 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addContainerGap(264, Short.MAX_VALUE))
+            .addContainerGap(21, Short.MAX_VALUE))
     );
+
+    jComboBox1.setSelectedItem(null);
+    jComboBox2.setSelectedItem(null);
 
     pack();
     }//GEN-END:initComponents
@@ -470,19 +602,14 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
 
                 mySQL_prepared_statement.execute();
 
-                // Betroffene Komponenten aktualisieren oder leeren
-                Operationen_JTable.refreshen(jTable3, "SELECT * FROM phpmyadmin.Zahlungsverfolgung WHERE 'OffenerBetrag' > '0.00';");
-//                Operationen_JTable.refreshen(jTable3, "SELECT * FROM phpmyadmin.Zahlungsverfolgung WHERE 'OffenerBetrag' > '0.00';");
-//                jScrollPane4.setViewportView(jTable3);
-                Operationen_JComboBox.refreshen(jComboBox2, "SELECT * FROM phpmyadmin.Zahlungsverfolgung", "Rechnungsnummer");
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField6.setText("");
-                jTextField7.setText("");
-                jTextField8.setText("");
-                JOptionPane.showMessageDialog(null, "Offene Rechnung erfolgreich in Netzwerkdatenbank eingetragen!", 
-                                              "ARSLAN KEBAP DATENBANK", JOptionPane.INFORMATION_MESSAGE, 
-                                              new ImageIcon(getClass().getResource("/myPackage/bilder/Netzwerkserver-128.png")));
+                // Betroffene Komponenten aktualisieren bzw. leeren
+                Komponenten_reloaden();
+                Offene_RG_Textfelder_leeren();
+                
+                
+                JOptionPane.showMessageDialog(null, "Offene Rechnung erfolgreich\nin Netzwerkdatenbank eingetragen.",
+                        "ARSLAN KEBAP DATENBANK", JOptionPane.INFORMATION_MESSAGE,
+                        new ImageIcon(getClass().getResource("/myPackage/bilder/Netzwerkserver-128.png")));
 //                Fehlgeschlagener Versuch alle Komponenten auf einmal zu "refreshen" (ohne refresh-Methoden nutzen zu müssen):
 //                SwingUtilities.updateComponentTreeUI(this);
 //                Runnable runnable = new Runnable() {public void run() {initComponents();}};
@@ -509,12 +636,68 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        Komponenten_reloaden();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        Offene_RG_Textfelder_leeren();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void Offene_RG_Textfelder_leeren() {
+        jComboBox1.setSelectedItem(null);
+        jDateChooser1.setDate(null);
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
+    }
+
+    public void Komponenten_reloaden() {
+        Operationen_JTable.refreshen(jTable3, letzte_ansicht_jTable3);
+        Operationen_JTable.refreshen(jTable2, letzte_ansicht_jTable2);
+        Operationen_JTextField.refreshen(jTextField3, letzte_ansicht_jTable3, spaltenname_summenfeld_jTextField3);
+        Operationen_JTextField.refreshen(jTextField4, letzte_ansicht_jTable3, spaltenname_summenfeld_jTextField4);
+        Operationen_JTextField.refreshen(jTextField5, letzte_ansicht_jTable3, spaltenname_summenfeld_jTextField5);
+        Operationen_JTextField.refreshen(jTextField9, letzte_ansicht_jTable3, spaltenname_summenfeld_jTextField9);
+        Operationen_JTextField.refreshen(jTextField10, letzte_ansicht_jTable3, spaltenname_summenfeld_jTextField10);
+        Operationen_JComboBox.refreshen(jComboBox1, "SELECT * FROM Kunden", "Kundenname");
+        Operationen_JComboBox.refreshen(jComboBox2, "SELECT * FROM Zahlungsverfolgung", "Rechnungsnummer");
+    }
+
+    /* Mit den *_ansicht_* -Strings erreiche ich, dass der Code sauberer aussieht und 
+     * dass die JTables, JLabels, JComboBoxen etc. leichter refreshed werden können:
+     * Durch der Unterscheidung zwischen standard_ansicht_* und letzte_ansicht_* kann ich
+     * bspw. die aktuellen Summen von JTable-Spalten in JLabels schön angeben.
+     */
+    public String standard_ansicht_jTable3 = "SELECT * FROM Zahlungsverfolgung WHERE 'OffenerBetrag'>'0.00';";
+    public String letzte_ansicht_jTable3 = "SELECT * FROM Zahlungsverfolgung WHERE 'OffenerBetrag'>'0.00';"; // wird zunächst identisch initialisiert. Wichtig z.B. für Summenanzeigen.
+    public String standard_ansicht_jTable2 = "SELECT * FROM Zahlungsverfolgung_Teilzahlungen;";
+    public String letzte_ansicht_jTable2 = "SELECT * FROM Zahlungsverfolgung_Teilzahlungen;";
+    public String spaltenname_summenfeld_jTextField3 = "Bruttorechnungsbetrag";
+    public String spaltenname_summenfeld_jTextField4 = "OffenerBetrag";
+    public String spaltenname_summenfeld_jTextField5 = "Gewicht1";
+    public String spaltenname_summenfeld_jTextField9 = "Gewicht2";
+    public String spaltenname_summenfeld_jTextField10 = "Gewicht3";
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -522,10 +705,13 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
@@ -535,10 +721,15 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable2;
     public javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
 }

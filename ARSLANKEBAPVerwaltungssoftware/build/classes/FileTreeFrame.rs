@@ -1,3 +1,0 @@
-FileSystemModel
-FileSystemModel$TreeFile
-FileTreeFrame

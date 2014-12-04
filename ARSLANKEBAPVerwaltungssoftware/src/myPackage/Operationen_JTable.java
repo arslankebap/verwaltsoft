@@ -18,10 +18,9 @@ import net.proteanit.sql.DbUtils;
  *
  * @author SEAMAC
  */
-public class Operationen_JTable extends JTable{
-    
-    //Eine mySQL-Verbindung zur Datenbank aufbaue
+public class Operationen_JTable extends JTable {
 
+    //Eine mySQL-Verbindung zur Datenbank aufbaue
     public static JTable JTable_erzeugen(String sql_anweisung) {
 
         /*       Mit dem folgenden Code würden wir normalerweise die JTable uneditierbar machen...
@@ -38,7 +37,12 @@ public class Operationen_JTable extends JTable{
          *        };
          *        JTable jtable = new JTable(model);
          */
-        JTable jtable = new JTable();
+        JTable jtable = new JTable(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         refreshen(jtable, sql_anweisung);
 
         return jtable;
@@ -51,7 +55,6 @@ public class Operationen_JTable extends JTable{
 //            JTabelle.removeAll();
 //            JTabelle.revalidate();
             JTabelle.setModel(DbUtils.resultSetToTableModel(mySQLresultset));
-            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Tabelle konnte nicht refreshed werden:\n" + e);

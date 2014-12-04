@@ -123,7 +123,6 @@ public class Hauptoberflaeche extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         DokumentationUndDatein_Tab = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -137,8 +136,6 @@ public class Hauptoberflaeche extends javax.swing.JFrame {
         setName("Haupt_JFrame"); // NOI18N
 
         jTabbedPane1.setAutoscrolls(true);
-        jTabbedPane1.setMinimumSize(null);
-        jTabbedPane1.setPreferredSize(null);
 
         javax.swing.GroupLayout LieferantenLayout = new javax.swing.GroupLayout(Lieferanten);
         Lieferanten.setLayout(LieferantenLayout);
@@ -193,7 +190,6 @@ public class Hauptoberflaeche extends javax.swing.JFrame {
         jTabbedPane1.addTab("Produktionsverwaltung", Produktionsverw_Tab);
 
         jTabbedPane2.setMinimumSize(new java.awt.Dimension(1200, 172));
-        jTabbedPane2.setPreferredSize(null);
 
         javax.swing.GroupLayout Bestand_TabLayout = new javax.swing.GroupLayout(Bestand_Tab);
         Bestand_Tab.setLayout(Bestand_TabLayout);
@@ -444,13 +440,6 @@ public class Hauptoberflaeche extends javax.swing.JFrame {
     jLabel1.setForeground(new java.awt.Color(255, 153, 0));
     jLabel1.setText(" DOKUMENTENVERWALTUNG");
 
-    jButton1.setText("Dateisystem");
-    jButton1.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton1ActionPerformed(evt);
-        }
-    });
-
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
     jPanel2Layout.setHorizontalGroup(
@@ -470,13 +459,8 @@ public class Hauptoberflaeche extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(0, 0, Short.MAX_VALUE))
         .addGroup(DokumentationUndDatein_TabLayout.createSequentialGroup()
-            .addGroup(DokumentationUndDatein_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(DokumentationUndDatein_TabLayout.createSequentialGroup()
-                    .addGap(14, 14, 14)
-                    .addComponent(jButton1))
-                .addGroup(DokumentationUndDatein_TabLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap()
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap(284, Short.MAX_VALUE))
     );
     DokumentationUndDatein_TabLayout.setVerticalGroup(
@@ -485,9 +469,7 @@ public class Hauptoberflaeche extends javax.swing.JFrame {
             .addComponent(jLabel1)
             .addGap(33, 33, 33)
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-            .addComponent(jButton1)
-            .addGap(16, 16, 16))
+            .addContainerGap(106, Short.MAX_VALUE))
     );
 
     jTabbedPane1.addTab("Dokumentation und Datein", DokumentationUndDatein_Tab);
@@ -535,12 +517,6 @@ public class Hauptoberflaeche extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_TempuberwActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFrame test = new JFrame();
-        test = FileTreeFrame.FileTreeFrame_erzeugen("/Users/SEAMAC/");
-        test.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -586,7 +562,6 @@ public class Hauptoberflaeche extends javax.swing.JFrame {
     private javax.swing.JPanel Warenausgaenge_Tab;
     private javax.swing.JPanel Wareneingaenge_Tab;
     private javax.swing.JPanel Zeiterfassung_Tab;
-    private javax.swing.JButton jButton1;
     public javax.swing.JComboBox jComboBox_Tempuberw;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
