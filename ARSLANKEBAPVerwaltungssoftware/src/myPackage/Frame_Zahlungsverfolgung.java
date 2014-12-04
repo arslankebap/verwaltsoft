@@ -5,8 +5,10 @@ import com.sun.glass.events.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
 
@@ -39,9 +41,6 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
 
     private void initComponents() {//GEN-BEGIN:initComponents
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = myPackage.Operationen_JComboBox.mitAnweisung("SELECT * FROM Kunden","Kundenname");
@@ -79,21 +78,6 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jTextField10 = Operationen_JTextField.summiereDBSpalte(letzte_ansicht_jTable3,spaltenname_summenfeld_jTextField10);
         jButton5 = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
-        jLabel8.setText("jLabel8");
 
         setBackground(new java.awt.Color(153, 153, 153));
         setClosable(true);
@@ -144,8 +128,10 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     jScrollPane4.setBackground(new java.awt.Color(204, 204, 204));
     jScrollPane4.setBorder(null);
 
+    jTable3.setAutoCreateRowSorter(true);
     jTable3.setBackground(new java.awt.Color(153, 204, 255));
     jTable3.setForeground(new java.awt.Color(102, 102, 102));
+    jTable3.setCellSelectionEnabled(true);
     jTable3.setName(""); // NOI18N
     jTable3.setShowGrid(true);
     // Um Gui-Editor und gleichzeitig deutlich mehr freiheit zu haben:
@@ -321,7 +307,6 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     jLabel23.setText("Summe Gewicht3:");
     jLabel23.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-    jButton3.setBackground(null);
     jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/arrow_circle_left.png"))); // NOI18N
     jButton3.setBorderPainted(false);
     jButton3.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/myPackage/bilder/arrow_circle_left_clicked.png"))); // NOI18N
@@ -605,8 +590,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                 // Betroffene Komponenten aktualisieren bzw. leeren
                 Komponenten_reloaden();
                 Offene_RG_Textfelder_leeren();
-                
-                
+
                 JOptionPane.showMessageDialog(null, "Offene Rechnung erfolgreich\nin Netzwerkdatenbank eingetragen.",
                         "ARSLAN KEBAP DATENBANK", JOptionPane.INFORMATION_MESSAGE,
                         new ImageIcon(getClass().getResource("/myPackage/bilder/Netzwerkserver-128.png")));
@@ -649,7 +633,76 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
+             
+        letzte_ansicht_jTable3 = "SELECT * FROM Zahlungsverfolgung WHERE";
+        int i = 0;
+        String dateString = "";
+        
+        if (jComboBox1.getSelectedItem() != null) {
+            letzte_ansicht_jTable3 += " Kundenname LIKE '%" + jComboBox1.getSelectedItem() + "%'";
+            i++;
+        }
+        if (!jTextField1.getText().trim().equals("")) {
+            if (i >= 1) {
+                letzte_ansicht_jTable3 += " AND ";
+            }
+            letzte_ansicht_jTable3 += " Rechnungsnummer LIKE '%" + jTextField1.getText() + "%'";
+            i++;
+        }
+        if (!jTextField2.getText().trim().equals("")) {
+            if (i >= 1) {
+                letzte_ansicht_jTable3 += " AND ";
+            }
+            letzte_ansicht_jTable3 += " Bruttorechnungsbetrag = '" + jTextField2.getText() + "'";
+            i++;
+        }
+        if (!jTextField6.getText().trim().equals("")) {
+            if (i >= 1) {
+                letzte_ansicht_jTable3 += " AND ";
+            }
+            letzte_ansicht_jTable3 += " Gewicht1 = '" + jTextField6.getText() + "'";
+            i++;
+        }
+        if (!jTextField7.getText().trim().equals("")) {
+            if (i >= 1) {
+                letzte_ansicht_jTable3 += " AND ";
+            }
+            letzte_ansicht_jTable3 += " Gewicht2 = '" + jTextField7.getText() + "'";
+            i++;
+        }
+        if (!jTextField8.getText().trim().equals("")) {
+            if (i >= 1) {
+                letzte_ansicht_jTable3 += " AND ";
+            }
+            letzte_ansicht_jTable3 += " Gewicht3 = '" + jTextField8.getText() + "'";
+            i++;
+        }      
+        if (!((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText().trim().equals("")){
+            if (i >= 1) {
+                letzte_ansicht_jTable3 += " AND ";
+            }
+            Date dateFromDateChooser = jDateChooser1.getDate();
+            dateString = String.format("%1$tY-%1$tm-%1$td", dateFromDateChooser);
+            //letzte_ansicht_jTable3 += " Gewicht3";
+            System.out.println(dateString);
+            letzte_ansicht_jTable3 += " Erfassungszeitstempel LIKE '" + dateString + "%'";
+            i++;
+        }
+        if (!letzte_ansicht_jTable3.contains(";")) {
+            letzte_ansicht_jTable3 += ";";
+        }
+
+
+        
+        
+        System.out.println(jDateChooser1.getDate());
+        
+        if (i==0) {
+            letzte_ansicht_jTable3 = standard_ansicht_jTable3;
+        }
+        System.out.println(letzte_ansicht_jTable3);
+        Komponenten_reloaden();
+        
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void Offene_RG_Textfelder_leeren() {
@@ -672,6 +725,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         Operationen_JTextField.refreshen(jTextField10, letzte_ansicht_jTable3, spaltenname_summenfeld_jTextField10);
         Operationen_JComboBox.refreshen(jComboBox1, "SELECT * FROM Kunden", "Kundenname");
         Operationen_JComboBox.refreshen(jComboBox2, "SELECT * FROM Zahlungsverfolgung", "Rechnungsnummer");
+        Offene_RG_Textfelder_leeren();
     }
 
     /* Mit den *_ansicht_* -Strings erreiche ich, dass der Code sauberer aussieht und 
@@ -712,12 +766,9 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     public javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;

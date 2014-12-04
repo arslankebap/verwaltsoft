@@ -20,23 +20,8 @@ import net.proteanit.sql.DbUtils;
  */
 public class Operationen_JTable extends JTable {
 
-    //Eine mySQL-Verbindung zur Datenbank aufbaue
-    public static JTable JTable_erzeugen(String sql_anweisung) {
 
-        /*       Mit dem folgenden Code würden wir normalerweise die JTable uneditierbar machen...
-         *        Da aber später in refreshen() das TableModel neu gesettet wird (mit mysql-resultset-daten) 
-         *        und ein anschließendes setten mit einem DefaultTableModel nicht richtig funktioniert, verzichte ich 
-         *        notgedrungen z.Z. auf die "Nichteditierbarkeit" da die tatsächlichen Daten in der Datenbank durch  
-         *        die JTable-Veränderungen sowieso nicht editiert werden. Trotzdem: Muss gelöst werden!
-         *
-         *        DefaultTableModel model = new DefaultTableModel() {
-         *            @Override
-         *            public boolean isCellEditable(int rowIndex, int mColIndex) {
-         *                return false;
-         *            }
-         *        };
-         *        JTable jtable = new JTable(model);
-         */
+    public static JTable JTable_erzeugen(String sql_anweisung) {
         JTable jtable = new JTable(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -52,8 +37,6 @@ public class Operationen_JTable extends JTable {
         try {
 
             ResultSet mySQLresultset = Operationen_MySQL.ResultSet_aus_Anweisung(sql_anweisung);
-//            JTabelle.removeAll();
-//            JTabelle.revalidate();
             JTabelle.setModel(DbUtils.resultSetToTableModel(mySQLresultset));
 
         } catch (Exception e) {

@@ -22,7 +22,7 @@ public class Desktop extends javax.swing.JFrame {
      */
     public Desktop() {
         initComponents();
-        setTitle("ARSLAN KEBAP GmbH & Co.KG // Version 0.2.6");
+        setTitle("ARSLAN KEBAP GmbH & Co.KG // Version 0.2.8");
         Frame_Auswahlmenue auswahlmenu = new Frame_Auswahlmenue();
     }
 
