@@ -3,8 +3,8 @@ package myPackage;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -33,20 +33,40 @@ public class Operationen_JTextField extends JTextField {
                 BigDecimal zwischenwert = nullwert.add(resultset.getBigDecimal(spaltenname));
                 summe += zwischenwert.doubleValue();
             }
-            if (spaltenname.contains("betrag") || spaltenname.contains("Betrag")) {
-                jtextfield.setText(new DecimalFormat("#.##").format(summe) + " EUR");
-            } else {
-                jtextfield.setText(new DecimalFormat("#.##").format(summe) + " kg");
-            }
+
+            jtextfield.setText(new DecimalFormat("#.##").format(summe));
+            
             return jtextfield;
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Fehler in JLabel_Vorlage.summiereFloatsAusDBSpalte(): \n" + e);
+            JOptionPane.showMessageDialog(null, "Fehler in JLabel_Vorlage.summiereDBSpalte(): \n" + e);
             return null;
         }
     }
+    
+    public static JTextField summiereNonDBSpalte(JTable jtable1, int spalte){
+        JTextField jtextfield = new JTextField();
+        BigDecimal nullwert = BigDecimal.ZERO;
+        BigDecimal summe = BigDecimal.ZERO;
 
-    public static void refreshen(JTextField textfeld, String sql_anweisung, String spaltenname) {
+        try {
+            
+            for (int i = 0, rows = jtable1.getRowCount(); i < rows; i++){
+                BigDecimal zwischenwert = nullwert.add((BigDecimal) jtable1.getValueAt(i, spalte));  
+                summe = summe.add(zwischenwert);  
+            }  
+            
+            jtextfield.setText(new DecimalFormat("#.##").format(summe));
+            
+            return jtextfield;
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Fehler in JLabel_Vorlage.summiereNonDBSpalte(): \n" + e);
+            return null;
+        }
+    }
+    
+    // refreshen aus mySQL-Datenbank:
+    public static void refreshen(JTextField textfeld, String sql_anweisung, String spaltenname) { 
         /*  Vorsicht: Da meine meisten Gewichts- und Geldbetragsspalten aus verschiedensten Gründen in der MySQL-DB 
          das Format DECIMAL(10,2) haben, muss bei der Nutzung in Java BigDecimal verwendet werden. BigDecimal hat 
          jedoch einige Eigenheiten, daher ist ein einfaches addieren oder adden zweier BigDecimals nicht möglich.
@@ -61,14 +81,29 @@ public class Operationen_JTextField extends JTextField {
                 BigDecimal zwischenwert = nullwert.add(resultset.getBigDecimal(spaltenname));
                 summe += zwischenwert.doubleValue();
             }
-            if (spaltenname.contains("betrag") || spaltenname.contains("Betrag")) {
-                textfeld.setText(new DecimalFormat("#.##").format(summe) + " EUR");
-            } else {
-                textfeld.setText(new DecimalFormat("#.##").format(summe) + " kg");
-            }
+            textfeld.setText(new DecimalFormat("#.##").format(summe));
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Fehler in Operationen_JLabel.refreshen(): \n" + e);
 
+        }
+    }
+    
+    public static void refreshen(JTable jtable1, JTextField jtextfield, int spalte){
+        BigDecimal nullwert = BigDecimal.ZERO;
+        BigDecimal summe = BigDecimal.ZERO;
+
+        try {
+            
+            for (int i = 0, rows = jtable1.getRowCount(); i < rows; i++){
+                BigDecimal zwischenwert = nullwert.add((BigDecimal) jtable1.getValueAt(i, spalte));  
+                summe = summe.add(zwischenwert);  
+            }  
+            
+            jtextfield.setText(new DecimalFormat("#.##").format(summe));
+           
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }
 }

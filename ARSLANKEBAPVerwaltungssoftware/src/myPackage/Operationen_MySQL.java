@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,8 +21,9 @@ import javax.swing.JOptionPane;
  */
 public class Operationen_MySQL {
 
-    static Connection mySQLverbindung;
-    static PreparedStatement mySQL_prepared_statement = null;
+    static Connection conn;
+    static PreparedStatement ps;
+    static ResultSet rs;
     static String ip = "192.168.179.71";
     static String db = "phpmyadmin";
     static String user = "root";
@@ -28,23 +31,23 @@ public class Operationen_MySQL {
 
     public static void AnweisungSenden(String sql_anweisung) {
         try {
-            mySQLverbindung = Operationen_MySQL.VerbindungAufbauen();
-            PreparedStatement mySQL_prepared_statement = mySQLverbindung.prepareStatement(sql_anweisung);
+            conn = Operationen_MySQL.VerbindungAufbauen();
+            PreparedStatement mySQL_prepared_statement = conn.prepareStatement(sql_anweisung);
             mySQL_prepared_statement.execute();
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Operationen_MySQL.AnweisungSenden() nicht richtig ausgefuehrt:\n" + e);
         }
-    
+
     }
 
     public static Connection VerbindungAufbauen() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            mySQLverbindung = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + db + "?user=" + user + "&password=" + pw);
+            conn = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + db + "?user=" + user + "&password=" + pw);
             //JOptionPane.showMessageDialog(null, "Verbindung zu Datenbankserver aufgebaut");
-            //return mySQLverbindung;
-            return mySQLverbindung;
+            //return conn;
+            return conn;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Datenbankverbindung nicht moeglich:\n" + e);
             return null;
@@ -55,9 +58,9 @@ public class Operationen_MySQL {
     public static Connection VerbindungAufbauen(String ip, String db, String user, String pw) {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            mySQLverbindung = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + db + "?user=" + user + "&password=" + pw);
+            conn = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + db + "?user=" + user + "&password=" + pw);
             //JOptionPane.showMessageDialog(null, "Verbindung zu Datenbankserver aufgebaut");
-            return mySQLverbindung;
+            return conn;
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -73,12 +76,13 @@ public class Operationen_MySQL {
 
     public static void VerbindungBeenden() {
         try {
-
-            mySQLverbindung.close();
-            mySQL_prepared_statement.close();
+            // Reihenfolge wichtig!! Nicht ändern!!
+            rs.close();
+            ps.close();
+            conn.close();
 
             //JOptionPane.showMessageDialog(null, "Verbindung zu Datenbankserver aufgebaut");
-            //return mySQLverbindung;
+            //return conn;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "mySQLVerbindungBeenden: \n" + e);
         }
@@ -86,15 +90,16 @@ public class Operationen_MySQL {
 
     public static ResultSet ResultSet_aus_Anweisung(String sql_anweisung) {
         try {
-            mySQLverbindung = Operationen_MySQL.VerbindungAufbauen();
-            PreparedStatement ps = mySQLverbindung.prepareStatement(sql_anweisung);
-            ResultSet mySQLresultset = ps.executeQuery();
-            return mySQLresultset;
+            conn = Operationen_MySQL.VerbindungAufbauen();
+            PreparedStatement ps = conn.prepareStatement(sql_anweisung);
+            rs = ps.executeQuery();
+            return rs;
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "mySQLResultSet_aus_Anweisung: \n" + e);
             return null;
         }
+
     }
 
 }

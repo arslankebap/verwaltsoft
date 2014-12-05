@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -22,7 +23,7 @@ public class InputVerifier2Nachkommastellen extends InputVerifier {
 
     @Override
     public boolean verify(JComponent inputfield) {
-        String text = ((JTextField) inputfield).getText();
+        String text = ((JTextComponent) inputfield).getText();
         try {
             BigDecimal value = new BigDecimal(text);
             return (value.scale() <= Math.abs(2));
@@ -32,7 +33,7 @@ public class InputVerifier2Nachkommastellen extends InputVerifier {
     }
     
     public static boolean verifizieren(JComponent inputfield) {
-        String text = ((JTextField) inputfield).getText();
+        String text = ((JTextComponent) inputfield).getText();
         try {
             BigDecimal value = new BigDecimal(text);
             return (value.scale() <= Math.abs(2));

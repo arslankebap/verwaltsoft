@@ -50,7 +50,7 @@ public class KundenPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) kundennummer;
+        hash += kundennummer;
         hash += (kundenname != null ? kundenname.hashCode() : 0);
         return hash;
     }

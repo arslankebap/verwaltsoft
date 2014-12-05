@@ -17,10 +17,10 @@ import javax.swing.JOptionPane;
  */
 public class Operationen_JLabel extends JLabel {
     /*
-    VORSICHT: Text in JLabels ist nicht markierbar! Falls diese Funktionalität gewünscht ist: 
-    In Operationen_JTextField habe ich fast identische Methoden eingebaut.
-    */
-    
+     VORSICHT: Text in JLabels ist nicht markierbar! Falls diese Funktionalität gewünscht ist: 
+     In Operationen_JTextField habe ich fast identische Methoden eingebaut.
+     */
+
     public static JLabel summiereDBSpalte(String sql_anweisung, String spaltenname) {
         /*  Vorsicht: Da meine meisten Gewichts- und Geldbetragsspalten aus verschiedensten Gründen in der MySQL-DB 
          das Format DECIMAL(10,2) haben, muss bei der Nutzung in Java BigDecimal verwendet werden. BigDecimal hat 
@@ -37,11 +37,9 @@ public class Operationen_JLabel extends JLabel {
                 BigDecimal zwischenwert = nullwert.add(resultset.getBigDecimal(spaltenname));
                 summe += zwischenwert.doubleValue();
             }
-            if (spaltenname.contains("betrag") || spaltenname.contains("Betrag")) {
-                jlabel.setText(new DecimalFormat("#.##").format(summe) + " EUR");
-            } else {
-                jlabel.setText(new DecimalFormat("#.##").format(summe) + " kg");
-            }
+
+            jlabel.setText(new DecimalFormat("#.##").format(summe));
+
             return jlabel;
 
         } catch (Exception e) {

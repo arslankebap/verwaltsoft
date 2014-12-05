@@ -6,9 +6,11 @@
 package myPackage;
 
 import java.awt.Color;
+import java.awt.Desktop.Action;
 import java.util.ArrayList;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
+import javax.swing.text.DefaultEditorKit;
 
 
 /**
@@ -101,6 +103,11 @@ public class Desktop extends javax.swing.JFrame {
 
         copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Copy");
+        copyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyMenuItemActionPerformed(evt);
+            }
+        });
         editMenu.add(copyMenuItem);
 
         pasteMenuItem.setMnemonic('p');
@@ -151,8 +158,13 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
-        // TODO add your handling code here:
+       // To-Do: Ausschneidefunktion 
     }//GEN-LAST:event_cutMenuItemActionPerformed
+
+    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItemActionPerformed
+        DefaultEditorKit.CopyAction copyAction = new DefaultEditorKit.CopyAction();
+        // To-Do: Kopierfunktion
+    }//GEN-LAST:event_copyMenuItemActionPerformed
 
     
     /**
