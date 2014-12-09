@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myPackage;
+package ARSLANKEBAP;
 
 import java.sql.ResultSet;
 import javax.swing.JComboBox;
@@ -20,7 +20,7 @@ public class Operationen_JComboBox {
     public static JComboBox mitAnweisung(java.lang.String sql_anweisung,java.lang.String spaltenname){
             JComboBox jcombobox = new JComboBox();
         try {
-            ResultSet resultset = Operationen_MySQL.ResultSet_aus_Anweisung(sql_anweisung);
+            ResultSet resultset = Operationen_MySQL.getInstance().ResultSet_aus_Anweisung(sql_anweisung);
             
             while (resultset.next()) {
                 String name = resultset.getString(spaltenname);
@@ -41,7 +41,7 @@ public class Operationen_JComboBox {
     public static void refreshen(JComboBox jcombo, java.lang.String sql_anweisung,java.lang.String spaltenname){
          try {
             jcombo.removeAllItems();
-            ResultSet resultset = Operationen_MySQL.ResultSet_aus_Anweisung(sql_anweisung);
+            ResultSet resultset = Operationen_MySQL.getInstance().ResultSet_aus_Anweisung(sql_anweisung);
             
             
             while (resultset.next()) {
@@ -56,6 +56,17 @@ public class Operationen_JComboBox {
             JOptionPane.showMessageDialog(null, "Fehler beim updaten einer ComboBox: \n"+e);
 
         }
+    }
+    
+        static Operationen_JComboBox instanz;
+    public static synchronized Operationen_JComboBox getInstance() {
+        if(Operationen_JComboBox.instanz == null){
+            System.out.println("Operationen_JComboBox-Thread erstellt");
+            Operationen_JComboBox.instanz = new Operationen_JComboBox();
+            return Operationen_JComboBox.instanz;            
+        }
+    
+        return Operationen_JComboBox.instanz;
     }
     
 }

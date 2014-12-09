@@ -1,4 +1,4 @@
-package myPackage;
+package ARSLANKEBAP;
 
 import java.awt.BorderLayout;
 import java.sql.ResultSet;
@@ -28,7 +28,7 @@ public class Operationen_JTable extends JTable {
                 return false;
             }
         };
-        refreshen(jtable, sql_anweisung);
+        getInstance().refreshen(jtable, sql_anweisung);
 
         return jtable;
     }
@@ -36,7 +36,7 @@ public class Operationen_JTable extends JTable {
     public static void refreshen(JTable JTabelle, String sql_anweisung) {
         try {
 
-            ResultSet mySQLresultset = Operationen_MySQL.ResultSet_aus_Anweisung(sql_anweisung);
+            ResultSet mySQLresultset = Operationen_MySQL.getInstance().ResultSet_aus_Anweisung(sql_anweisung);
             JTabelle.setModel(DbUtils.resultSetToTableModel(mySQLresultset));
 
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class Operationen_JTable extends JTable {
 
     public static JFrame JTableJFrame_erzeugen(String NameDerSQLTabelle, String SQL_anweisung, int preferred_width, int preferred_height) {
         JFrame myWindow = new JFrame(NameDerSQLTabelle);
-        JScrollPane jSPane = JTableJScrollPane_erzeugen(NameDerSQLTabelle, SQL_anweisung);
+        JScrollPane jSPane = getInstance().JTableJScrollPane_erzeugen(NameDerSQLTabelle, SQL_anweisung);
 
         // if sorgt hier dafür, dass altes Fenster geschlossen und neues erstellt wird
         if (myWindow != null) {
@@ -101,9 +101,20 @@ public class Operationen_JTable extends JTable {
         jSPane.setViewportView(JTabelle1);
         // JTable mit SQL-Anweisung refreshen:
         jSPane.setViewportView(JTabelle1);
-        refreshen(JTabelle1, SQL_anweisung);
+        getInstance().refreshen(JTabelle1, SQL_anweisung);
         //myWindow.setPreferredSize(new Dimension(preferred_width, preferred_height));
         return jSPane;
     }
 
+    static Operationen_JTable instanz;
+    public static synchronized Operationen_JTable getInstance() {
+        if(Operationen_JTable.instanz == null){
+            System.out.println("Operationen_JTable-Thread erstellt");
+            Operationen_JTable.instanz = new Operationen_JTable();
+            return Operationen_JTable.instanz;            
+        }
+    
+        return Operationen_JTable.instanz;
+    }
+    
 }

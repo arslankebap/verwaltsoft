@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myPackage;
+package ARSLANKEBAP;
 
 import java.awt.Color;
-import java.awt.Desktop.Action;
-import java.util.ArrayList;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.text.DefaultEditorKit;
@@ -24,8 +22,8 @@ public class Desktop extends javax.swing.JFrame {
      */
     public Desktop() {
         initComponents();
-        setTitle("ARSLAN KEBAP GmbH & Co.KG // Version 0.2.8");
-        Frame_Auswahlmenue auswahlmenu = new Frame_Auswahlmenue();
+        setTitle("ARSLAN KEBAP GmbH & Co.KG // Version 0.3.0");
+        Frame_Auswahlmenue.getInstance();
     }
 
     /**
@@ -154,7 +152,7 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-            Frame_Auswahlmenue auswahlmenu = new Frame_Auswahlmenue();
+        Frame_Auswahlmenue.getInstance();
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
@@ -206,7 +204,7 @@ public class Desktop extends javax.swing.JFrame {
         });
     }
     
-    public ArrayList titel_aller_offenen_fenster = new ArrayList(); // Damit kann ich steuern, ob es mehrere Instanzen eines JInternalFrames gibt
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;

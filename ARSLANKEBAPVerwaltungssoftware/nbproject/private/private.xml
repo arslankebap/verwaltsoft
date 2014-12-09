@@ -4,17 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
         <group name="NetBeansProjects">
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/KundenFrame.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/Desktop.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/InputVerifiers.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/Kunden.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/WEWAARSLANProdukte.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/JComboBox_Vorlage.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/Tabellenoperationen.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/Zahlungsverfolgung.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/Auswahlmenu.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/Produktion.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/myPackage/Frame_Vorlage.java</file>
+            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Operationen_JTextField.java</file>
+            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Frame_Zahlungsverfolgung.java</file>
+            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Operationen_MySQL.java</file>
+            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Desktop.java</file>
+            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Frame_Auswahlmenue.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,4 +1,4 @@
-package myPackage;
+package ARSLANKEBAP;
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -7,20 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils;
 
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author SEAMAC
- */
+// Vorsicht! Instanzieren mit Operationen_MySQL.getInstance(); 
+// Und Methoden immer so verwenden: Operationen_MySQL.getInstance().methodenname(...)
 public class Operationen_MySQL {
-
+ 
     static Connection conn;
     static PreparedStatement ps;
     static ResultSet rs;
@@ -31,7 +23,7 @@ public class Operationen_MySQL {
 
     public static void AnweisungSenden(String sql_anweisung) {
         try {
-            conn = Operationen_MySQL.VerbindungAufbauen();
+            conn = Operationen_MySQL.getInstance().VerbindungAufbauen();
             PreparedStatement mySQL_prepared_statement = conn.prepareStatement(sql_anweisung);
             mySQL_prepared_statement.execute();
 
@@ -90,7 +82,7 @@ public class Operationen_MySQL {
 
     public static ResultSet ResultSet_aus_Anweisung(String sql_anweisung) {
         try {
-            conn = Operationen_MySQL.VerbindungAufbauen();
+            conn = Operationen_MySQL.getInstance().VerbindungAufbauen();
             PreparedStatement ps = conn.prepareStatement(sql_anweisung);
             rs = ps.executeQuery();
             return rs;
@@ -101,5 +93,17 @@ public class Operationen_MySQL {
         }
 
     }
+    
 
+    static Operationen_MySQL instanz;
+    public static synchronized Operationen_MySQL getInstance() {
+        if(Operationen_MySQL.instanz == null){
+            System.out.println("Operationen_MySQL-Thread erstellt");
+            Operationen_MySQL.instanz = new Operationen_MySQL();
+            return Operationen_MySQL.instanz;            
+        }
+    
+        return Operationen_MySQL.instanz;
+    }
+    
 }

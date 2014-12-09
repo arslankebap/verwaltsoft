@@ -1,4 +1,4 @@
-package myPackage;
+package ARSLANKEBAP;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -28,7 +28,7 @@ public class Operationen_JTextField extends JTextField {
         Double summe = 0.00;
 
         try {
-            ResultSet resultset = Operationen_MySQL.ResultSet_aus_Anweisung(sql_anweisung);
+            ResultSet resultset = Operationen_MySQL.getInstance().ResultSet_aus_Anweisung(sql_anweisung);
             while (resultset.next()) {
                 BigDecimal zwischenwert = nullwert.add(resultset.getBigDecimal(spaltenname));
                 summe += zwischenwert.doubleValue();
@@ -65,7 +65,6 @@ public class Operationen_JTextField extends JTextField {
         }
     }
     
-    // refreshen aus mySQL-Datenbank:
     public static void refreshen(JTextField textfeld, String sql_anweisung, String spaltenname) { 
         /*  Vorsicht: Da meine meisten Gewichts- und Geldbetragsspalten aus verschiedensten Gründen in der MySQL-DB 
          das Format DECIMAL(10,2) haben, muss bei der Nutzung in Java BigDecimal verwendet werden. BigDecimal hat 
@@ -76,7 +75,7 @@ public class Operationen_JTextField extends JTextField {
         Double summe = 0.00;
 
         try {
-            ResultSet resultset = Operationen_MySQL.ResultSet_aus_Anweisung(sql_anweisung);
+            ResultSet resultset = Operationen_MySQL.getInstance().ResultSet_aus_Anweisung(sql_anweisung);
             while (resultset.next()) {
                 BigDecimal zwischenwert = nullwert.add(resultset.getBigDecimal(spaltenname));
                 summe += zwischenwert.doubleValue();
@@ -105,5 +104,16 @@ public class Operationen_JTextField extends JTextField {
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+    
+    static Operationen_JTextField instanz;
+    public static synchronized Operationen_JTextField getInstance() {
+        if(Operationen_JTextField.instanz == null){
+            System.out.println("Operationen_JTextField-Thread erstellt");
+            Operationen_JTextField.instanz = new Operationen_JTextField();
+            return Operationen_JTextField.instanz;            
+        }
+    
+        return Operationen_JTextField.instanz;
     }
 }

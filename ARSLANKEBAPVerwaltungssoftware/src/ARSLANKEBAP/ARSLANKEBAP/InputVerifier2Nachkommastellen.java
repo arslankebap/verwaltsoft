@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myPackage;
+package ARSLANKEBAP;
 
 import java.math.BigDecimal;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
-import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -31,7 +30,7 @@ public class InputVerifier2Nachkommastellen extends InputVerifier {
             return false;
         }
     }
-    
+
     public static boolean verifizieren(JComponent inputfield) {
         String text = ((JTextComponent) inputfield).getText();
         try {
@@ -44,7 +43,7 @@ public class InputVerifier2Nachkommastellen extends InputVerifier {
 
     public boolean shouldYieldFocus(JComponent input) {
         //Text je nach Ergebnis färben:
-        if (!verify(input)) {
+        if (!getInstance().verify(input)) {
 
             input.setForeground(java.awt.Color.RED);
             return false;
@@ -53,4 +52,17 @@ public class InputVerifier2Nachkommastellen extends InputVerifier {
             return true;
         }
     }
+
+    static InputVerifier2Nachkommastellen instanz;
+
+    public static synchronized InputVerifier2Nachkommastellen getInstance() {
+        if (InputVerifier2Nachkommastellen.instanz == null) {
+            System.out.println("InputVerifier2Nachkommastellen-Thread erstellt");
+            InputVerifier2Nachkommastellen.instanz = new InputVerifier2Nachkommastellen();
+            return InputVerifier2Nachkommastellen.instanz;
+        }
+
+        return InputVerifier2Nachkommastellen.instanz;
+    }
+
 }
