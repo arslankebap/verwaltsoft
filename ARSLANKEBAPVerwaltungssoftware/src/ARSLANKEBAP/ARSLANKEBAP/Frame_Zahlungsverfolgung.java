@@ -19,31 +19,12 @@ import javax.swing.text.JTextComponent;
 // Und Methoden immer so verwenden: Frame_Zahlungsverfolgung.getInstance().methodenname(...)
 public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
 
-    static int openFrameCount = 0;
-    static int xOffset = 30, yOffset = 30;
-    static ResultSet resultset;
-
-    /**
-     * Creates new form NewJInternalFrame_1
-     */
     public Frame_Zahlungsverfolgung() {
         initComponents();
-        setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
-        setVisible(true);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        Desktop.desktopPane.add(this);
-        if (openFrameCount == 7) {
-            openFrameCount = 0;
-        } else {
-            openFrameCount++;
-        }
-        try {
-            this.setSelected(true);
-        } catch (java.beans.PropertyVetoException e) {
-        }
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Wichtig für Threadsicherheit! Beibelassen!
+        Desktop.centerJIF(this); // fuegt JInternalFrame dem Desktop zentriert hinzu
 
     }
-
 
     private void initComponents() {//GEN-BEGIN:initComponents
 
@@ -99,7 +80,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jButton7 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable2 = ARSLANKEBAP.Operationen_JTable.getInstance().JTable_erzeugen(standard_ansicht_jTable2);
-        jComboBox2 = ARSLANKEBAP.Operationen_JComboBox.getInstance().mitAnweisung("SELECT * FROM Zahlungsverfolgung WHERE OffenerBetrag > '0.00' ORDER BY Erfassungszeitstempel DESC;","Rechnungsnummer");
+        jComboBox2 = ARSLANKEBAP.Operationen_JComboBox.getInstance().mitAnweisung("SELECT * FROM Zahlungsverfolgung ORDER BY Erfassungszeitstempel DESC;","Rechnungsnummer");
         jLabel21 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
@@ -108,7 +89,6 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jCheckBox2 = new javax.swing.JCheckBox();
         jLabel10 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jComboBox3 = jComboBox1;
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable4 = ARSLANKEBAP.Operationen_JTable.getInstance().JTable_erzeugen(standard_ansicht_jTable4);
         jTextField15 = new javax.swing.JTextField();
@@ -130,6 +110,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
+        jComboBox3 = ARSLANKEBAP.Operationen_JComboBox.getInstance().mitAnweisung("SELECT * FROM Kunden","Kundenname");
         jTextField21 = ARSLANKEBAP.Operationen_JTextField.getInstance().summiereNonDBSpalte(jTable4,2);
         jTextField23 = ARSLANKEBAP.Operationen_JTextField.getInstance().summiereDBSpalte(letzte_ansicht_jTable4,spaltenname_summenfeld_jTextField23);
         jTextField24 = ARSLANKEBAP.Operationen_JTextField.getInstance().summiereDBSpalte(letzte_ansicht_jTable4,spaltenname_summenfeld_jTextField24);
@@ -148,12 +129,14 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
-        jTextField27 = new JTextField(String.valueOf(jTable4.getRowCount()));
+        jTextField27 = new JTextField(String.valueOf(jTable2.getRowCount()));
         jLabel37 = new javax.swing.JLabel();
         jTextField22 = ARSLANKEBAP.Operationen_JTextField.getInstance().summiereNonDBSpalte(jTable2,3);
         jLabel28 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        jDateChooser5 = new com.toedter.calendar.JDateChooser();
+        jDateChooser6 = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(102, 102, 102));
         setClosable(true);
@@ -206,7 +189,6 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jScrollPane4.setBorder(null);
 
         jTable3.setAutoCreateRowSorter(true);
-        jTable3.setBackground(null);
         jTable3.setForeground(new java.awt.Color(102, 102, 102));
         jTable3.setCellSelectionEnabled(true);
         jTable3.setName(""); // NOI18N
@@ -636,15 +618,6 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jLabel26.setForeground(java.awt.Color.white);
         jLabel26.setText("Kunde:");
 
-        jComboBox3.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox3.setFont(new java.awt.Font("Lucida Grande", 0, 11)); // NOI18N
-        jComboBox3.setMaximumRowCount(500);
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
-            }
-        });
-
         jScrollPane6.setBackground(new java.awt.Color(204, 204, 204));
         jScrollPane6.setBorder(null);
 
@@ -819,6 +792,15 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
             }
         });
 
+        jComboBox3.setBackground(new java.awt.Color(204, 204, 204));
+        jComboBox3.setFont(new java.awt.Font("Lucida Grande", 0, 11)); // NOI18N
+        jComboBox3.setMaximumRowCount(500);
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+
         jTextField21.setEditable(false);
         jTextField21.setBackground(new java.awt.Color(102, 102, 102));
         jTextField21.setFont(new java.awt.Font("Lucida Grande", 0, 11)); // NOI18N
@@ -871,6 +853,9 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton11MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton11MouseEntered(evt);
             }
         });
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -967,6 +952,16 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
             }
         });
 
+        jDateChooser5.setBackground(new java.awt.Color(102, 102, 102));
+        jDateChooser5.setAlignmentX(0.0F);
+        jDateChooser5.setAlignmentY(0.0F);
+        jDateChooser5.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+
+        jDateChooser6.setBackground(new java.awt.Color(102, 102, 102));
+        jDateChooser6.setAlignmentX(0.0F);
+        jDateChooser6.setAlignmentY(0.0F);
+        jDateChooser6.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -974,62 +969,9 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel45)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel37)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel28)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane6)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel41)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel36)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel30)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel38)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel42)
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel39)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel43)
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel40)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel44)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel31)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel32)
-                                .addGap(251, 251, 251)
-                                .addComponent(jButton10))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel26)
@@ -1055,15 +997,13 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel34)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
@@ -1135,45 +1075,101 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel41)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel36)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel30)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel38)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel42)
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel39)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel43)
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel40)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel44)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel31)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel32)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton10)))
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel9)
+                                .addComponent(jLabel45)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel22)
+                                .addComponent(jLabel37)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton7)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(115, 115, 115))))
+                                .addComponent(jLabel28)
+                                .addGap(836, 836, 836)
+                                .addComponent(jButton7))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel9)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel22)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel21)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jCheckBox1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jCheckBox2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jDateChooser6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane5)))
+                        .addGap(101, 101, 101))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1210,7 +1206,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel14)
@@ -1232,9 +1228,10 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                     .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
                             .addComponent(jButton7)
+                            .addComponent(jLabel4)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel45)
@@ -1244,13 +1241,18 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                                     .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel28))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jDateChooser6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                         .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel21)
                         .addComponent(jCheckBox1)
@@ -1259,14 +1261,12 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9)
                         .addComponent(jCheckBox2)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton10)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel41)
                             .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1289,10 +1289,9 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                                     .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel42)
                                     .addComponent(jLabel43)
-                                    .addComponent(jLabel44)))))
-                    .addComponent(jButton10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel44))))))
+                .addGap(7, 7, 7)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel34)
@@ -1311,7 +1310,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                     .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         jComboBox1.setSelectedItem(null);
@@ -1487,7 +1486,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
             letzte_ansicht_jTable3 += " Gewicht3 LIKE '%" + jTextField8.getText() + "%'";
             bool = true;
         }
-
+        // Wenn das erste Datumsfeld eingetragen wurde:
         if (!(((JTextComponent) jDateChooser1.getDateEditor().getUiComponent()).getText().trim().equals(""))
                 && ((JTextComponent) jDateChooser2.getDateEditor().getUiComponent()).getText().trim().equals("")) {
             if (bool) {
@@ -1498,6 +1497,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
             letzte_ansicht_jTable3 += " Erfassungszeitstempel LIKE '" + dateString1 + "%'";
             bool = true;
         }
+        // Wenn das zweite Datumsfeld eingetragen wurde:        
         if (!(((JTextComponent) jDateChooser2.getDateEditor().getUiComponent()).getText().trim().equals(""))
                 && ((JTextComponent) jDateChooser1.getDateEditor().getUiComponent()).getText().trim().equals("")) {
             if (bool) {
@@ -1508,6 +1508,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
             letzte_ansicht_jTable3 += " Erfassungszeitstempel LIKE '" + dateString2 + "%'";
             bool = true;
         }
+        // Wenn beide Datumsfelder eingetragen wurden:
         if (!(((JTextComponent) jDateChooser1.getDateEditor().getUiComponent()).getText().trim().equals(""))
                 && !(((JTextComponent) jDateChooser2.getDateEditor().getUiComponent()).getText().trim().equals(""))) {
             if (bool) {
@@ -1623,19 +1624,11 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Zahlungseingang erfolgreich\nin Netzwerkdatenbank verbucht.",
                         "ARSLAN KEBAP DATENBANK", JOptionPane.INFORMATION_MESSAGE,
                         new ImageIcon(getClass().getResource("/Bilder/Netzwerkserver-128.png")));
-                // Betroffene Komponenten aktualisieren bzw. leeren
 
+                // Betroffene Komponenten aktualisieren bzw. leeren
                 Komponenten_reloaden();
                 Felder_leeren();
 
-//                Fehlgeschlagener Versuch alle Komponenten auf einmal zu "refreshen" (ohne refresh-Methoden nutzen zu müssen):
-//                SwingUtilities.updateComponentTreeUI(this);
-//                Runnable runnable = new Runnable() {public void run() {initComponents();}};
-//                runnable.run();
-//                this.invalidate();
-//                this.validate();
-//                this.revalidate();
-//                this.repaint();
             } else {
                 JOptionPane.showMessageDialog(null, "Eingaben bspw. auf folgendes pruefen:\n"
                         + "1. Entweder Barzahlung ODER Überweisung anklicken.\n"
@@ -1710,7 +1703,95 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField17ActionPerformed
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
-        // TODO add your handling code here:
+
+        // START DES SUCH
+        letzte_ansicht_jTable4 = "SELECT * FROM Zahlungsverfolgung WHERE";
+        boolean bool = false; //damits klar wird
+        String dateString1 = "";
+        String dateString2 = "";
+
+        if (jComboBox3.getSelectedItem() != null) {
+            letzte_ansicht_jTable4 += " Kundenname LIKE '%" + jComboBox3.getSelectedItem() + "%'";
+            bool = true;
+        }
+        if (!jTextField15.getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable4 += " AND ";
+            }
+            letzte_ansicht_jTable4 += " Rechnungsnummer LIKE '%" + jTextField15.getText() + "%'";
+            bool = true;
+        }
+        if (!jTextField16.getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable4 += " AND ";
+            }
+            letzte_ansicht_jTable3 += " Bruttorechnungsbetrag LIKE '%" + jTextField16.getText() + "%'";
+            bool = true;
+        }
+        if (!jTextField18.getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable4 += " AND ";
+            }
+            letzte_ansicht_jTable4 += " Gewicht1 LIKE '%" + jTextField18.getText() + "%'";
+            bool = true;
+        }
+        if (!jTextField19.getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable4 += " AND ";
+            }
+            letzte_ansicht_jTable4 += " Gewicht2 LIKE '%" + jTextField19.getText() + "%'";
+            bool = true;
+        }
+        if (!jTextField20.getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable4 += " AND ";
+            }
+            letzte_ansicht_jTable4 += " Gewicht3 LIKE '%" + jTextField20.getText() + "%'";
+            bool = true;
+        }
+        // Wenn das erste Datumsfeld eingetragen wurde:
+        if (!(((JTextComponent) jDateChooser3.getDateEditor().getUiComponent()).getText().trim().equals(""))
+                && ((JTextComponent) jDateChooser4.getDateEditor().getUiComponent()).getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable4 += " AND ";
+            }
+            Date datum = jDateChooser3.getDate();
+            dateString1 = String.format("%1$tY-%1$tm-%1$td", datum);
+            letzte_ansicht_jTable4 += " Erfassungszeitstempel LIKE '" + dateString1 + "%'";
+            bool = true;
+        }
+        // Wenn das zweite Datumsfeld eingetragen wurde:
+        if (!(((JTextComponent) jDateChooser4.getDateEditor().getUiComponent()).getText().trim().equals(""))
+                && ((JTextComponent) jDateChooser3.getDateEditor().getUiComponent()).getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable4 += " AND ";
+            }
+            Date datum = jDateChooser4.getDate();
+            dateString2 = String.format("%1$tY-%1$tm-%1$td", datum);
+            letzte_ansicht_jTable4 += " Erfassungszeitstempel LIKE '" + dateString2 + "%'";
+            bool = true;
+        }
+        // Wenn beide Datumsfelder eingetragen wurden:
+        if (!(((JTextComponent) jDateChooser3.getDateEditor().getUiComponent()).getText().trim().equals(""))
+                && !(((JTextComponent) jDateChooser4.getDateEditor().getUiComponent()).getText().trim().equals(""))) {
+            if (bool) {
+                letzte_ansicht_jTable4 += " AND ";
+            }
+            Date datum1 = jDateChooser3.getDate();
+            Date datum2 = jDateChooser4.getDate();
+            dateString1 = String.format("%1$tY-%1$tm-%1$td", datum1);
+            dateString2 = String.format("%1$tY-%1$tm-%1$td", datum2);
+            letzte_ansicht_jTable4 += " Erfassungszeitstempel BETWEEN '" + dateString1 + "%' AND '" + dateString2 + "%'";
+            bool = true;
+        }
+
+        letzte_ansicht_jTable4 += "AND OffenerBetrag LIKE '0.00' ORDER BY Erfassungszeitstempel DESC;";
+
+        if (bool == false) {
+            letzte_ansicht_jTable4 = standard_ansicht_jTable4;
+        }
+
+        Komponenten_reloaden();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton9MouseClicked
 
     private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField18ActionPerformed
@@ -1746,7 +1827,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton10MouseClicked
 
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
-        Felder_leeren();          // TODO add your handling code here:
+        Felder_leeren();       // TODO add your handling code here:
     }//GEN-LAST:event_jButton11MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -1762,16 +1843,92 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
+
+        letzte_ansicht_jTable2 = "SELECT * FROM Zahlungsverfolgung_Teilzahlungen WHERE";
+        boolean bool = false;
+        String dateString1 = "";
+        String dateString2 = "";
+
+        if (jComboBox2.getSelectedItem() != null) {
+            letzte_ansicht_jTable2 += " Rechnungsnummer LIKE '%" + jComboBox2.getSelectedItem() + "%'";
+            bool = true;
+        }
+        if (!jTextField14.getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable2 += " AND ";
+            }
+            letzte_ansicht_jTable2 += " EingegangenerBetrag LIKE '%" + jTextField14.getText() + "%'";
+            bool = true;
+        }
+        if (!jTextField13.getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable2 += " AND ";
+            }
+            letzte_ansicht_jTable2 += " Kommentar LIKE '%" + jTextField13.getText() + "%'";
+            bool = true;
+        }
+        // Wenn das erste Datumsfeld eingetragen wurde:
+        if (!(((JTextComponent) jDateChooser5.getDateEditor().getUiComponent()).getText().trim().equals(""))
+                && ((JTextComponent) jDateChooser6.getDateEditor().getUiComponent()).getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable2 += " AND ";
+            }
+            Date datum = jDateChooser5.getDate();
+            dateString1 = String.format("%1$tY-%1$tm-%1$td", datum);
+            letzte_ansicht_jTable2 += " Erfassungszeitstempel LIKE '" + dateString1 + "%'";
+            bool = true;
+        }
+        // Wenn das zweite Datumsfeld eingetragen wurde:
+        if (!(((JTextComponent) jDateChooser6.getDateEditor().getUiComponent()).getText().trim().equals(""))
+                && ((JTextComponent) jDateChooser5.getDateEditor().getUiComponent()).getText().trim().equals("")) {
+            if (bool) {
+                letzte_ansicht_jTable2 += " AND ";
+            }
+            Date datum = jDateChooser6.getDate();
+            dateString2 = String.format("%1$tY-%1$tm-%1$td", datum);
+            letzte_ansicht_jTable2 += " Erfassungszeitstempel LIKE '" + dateString2 + "%'";
+            bool = true;
+        }
+        // Wenn beide Datumsfelder eingetragen wurden:        
+        if (!(((JTextComponent) jDateChooser5.getDateEditor().getUiComponent()).getText().trim().equals(""))
+                && !(((JTextComponent) jDateChooser6.getDateEditor().getUiComponent()).getText().trim().equals(""))) {
+            if (bool) {
+                letzte_ansicht_jTable2 += " AND ";
+            }
+            Date datum1 = jDateChooser5.getDate();
+            Date datum2 = jDateChooser6.getDate();
+            dateString1 = String.format("%1$tY-%1$tm-%1$td", datum1);
+            dateString2 = String.format("%1$tY-%1$tm-%1$td", datum2);
+            letzte_ansicht_jTable2 += " Erfassungszeitstempel BETWEEN '" + dateString1 + "%' AND '" + dateString2 + "%'";
+            bool = true;
+        }
+
+        letzte_ansicht_jTable2 += ";";
+
+        if (bool == false) {
+            letzte_ansicht_jTable2 = standard_ansicht_jTable2;
+        }
+
+        Komponenten_reloaden();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton12MouseClicked
+
+    private void jButton11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11MouseEntered
 
     private void Felder_leeren() {
         jComboBox1.setSelectedItem(null);
         jComboBox2.setSelectedItem(null);
+        jComboBox3.setSelectedItem(null);
         jCheckBox1.setSelected(false);
         jCheckBox2.setSelected(false);
         jDateChooser1.setDate(null);
         jDateChooser2.setDate(null);
+        jDateChooser3.setDate(null);
+        jDateChooser4.setDate(null);
+        jDateChooser5.setDate(null);
+        jDateChooser6.setDate(null);
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField6.setText("");
@@ -1779,43 +1936,51 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
         jTextField8.setText("");
         jTextField13.setText("");
         jTextField14.setText("");
+        jTextField16.setText("");
+        jTextField18.setText("");
+        jTextField19.setText("");
+        jTextField20.setText("");
     }
 
     public void Komponenten_reloaden() {
+        // Tabellen selbst refreshen:
         Operationen_JTable.getInstance().refreshen(jTable3, letzte_ansicht_jTable3); // Offene RG-Tabelle
         Operationen_JTable.getInstance().refreshen(jTable2, letzte_ansicht_jTable2); // Zahlungseingänge-Tabelle
         Operationen_JTable.getInstance().refreshen(jTable4, letzte_ansicht_jTable4); // Zahlungseingänge-Tabelle
 
-        Operationen_JTextField.getInstance().refreshen(jTable3, jTextField3, 2); // Bruttorechnungsbetrag
-        Operationen_JTextField.getInstance().refreshen(jTable3, jTextField4, 3); // OffenerBetrag
-        Operationen_JTextField.getInstance().refreshen(jTable3, jTextField5, 4); // Gewicht1
-        Operationen_JTextField.getInstance().refreshen(jTable3, jTextField9, 5);// Gewicht2
-        Operationen_JTextField.getInstance().refreshen(jTable3, jTextField10, 6);// Gewicht3
-
-        Operationen_JTextField.getInstance().refreshen(jTable4, jTextField21, 2); // Bruttorechnungsbetrag
-        Operationen_JTextField.getInstance().refreshen(jTable4, jTextField23, 4); // Gewicht1
-        Operationen_JTextField.getInstance().refreshen(jTable4, jTextField24, 5);// Gewicht2
-        Operationen_JTextField.getInstance().refreshen(jTable4, jTextField25, 6);// Gewicht3
-
-        jTextField27.setText(String.valueOf(jTable2.getRowCount())); // Anzahl angezeigter Zeilen
+        // Alle Komponenten um Tabelle 'Offene RG' herum:
+        Operationen_JTextField.getInstance().refreshen(jTable3, jTextField3, 2); // Bruttorechnungsbetrag-Spalte summieren
+        Operationen_JTextField.getInstance().refreshen(jTable3, jTextField4, 3); // OffenerBetrag-Spalte summieren
+        Operationen_JTextField.getInstance().refreshen(jTable3, jTextField5, 4); // Gewicht1-Spalte summieren
+        Operationen_JTextField.getInstance().refreshen(jTable3, jTextField9, 5);// Gewicht2-Spalte summieren
+        Operationen_JTextField.getInstance().refreshen(jTable3, jTextField10, 6);// Gewicht3-Spalte summieren
         jTextField11.setText(String.valueOf(jTable3.getRowCount())); // Anzahl angezeigter Zeilen
-        jTextField26.setText(String.valueOf(jTable4.getRowCount())); // Anzahl angezeigter Zeilen
         jTextField12.setText(String.valueOf(new DecimalFormat("#.##").format( // Gesamtgewicht. Vorsicht: Betroffene Gewichte müssen zuvor refrehed worden sein!
                 (Double) Double.parseDouble(jTextField5.getText())
                 + (Double) Double.parseDouble(jTextField9.getText())
-                + (Double) Double.parseDouble(jTextField10.getText())
-        )));
+                + (Double) Double.parseDouble(jTextField10.getText()))));
+        Operationen_JComboBox.getInstance().refreshen(jComboBox1, "SELECT * FROM Kunden", "Kundenname"); // Kundennamen-ComboBox bei Offene RG-Tabelle
 
+        // Alle Komponenten um Tabelle 'Erledigte RG' herum:
+        Operationen_JTextField.getInstance().refreshen(jTable4, jTextField21, 2); // Bruttorechnungsbetrag-Spalte summieren
+        Operationen_JTextField.getInstance().refreshen(jTable4, jTextField23, 4); // Gewicht1-Spalte summieren
+        Operationen_JTextField.getInstance().refreshen(jTable4, jTextField24, 5);// Gewicht2-Spalte summieren
+        Operationen_JTextField.getInstance().refreshen(jTable4, jTextField25, 6);// Gewicht3-Spalte summieren
+        jTextField26.setText(String.valueOf(jTable4.getRowCount())); // Anzahl angezeigter Zeilen
         jTextField17.setText(String.valueOf(new DecimalFormat("#.##").format( // Gesamtgewicht. Vorsicht: Betroffene Gewichte müssen zuvor refrehed worden sein!
                 (Double) Double.parseDouble(jTextField23.getText())
                 + (Double) Double.parseDouble(jTextField24.getText())
-                + (Double) Double.parseDouble(jTextField25.getText())
-        )));
+                + (Double) Double.parseDouble(jTextField25.getText()))));
+        Operationen_JComboBox.getInstance().refreshen(jComboBox3, "SELECT * FROM Kunden", "Kundenname");
 
-        Operationen_JComboBox.getInstance().refreshen(jComboBox1, "SELECT * FROM Kunden", "Kundenname"); // Kundennamen-ComboBox bei Offene RG-Tabelle
-        jComboBox3 = jComboBox1; // Um nicht die selbe Abfrage doppelt zu tätigen
-        Operationen_JComboBox.getInstance().refreshen(jComboBox2, standard_ansicht_jTable3, "Rechnungsnummer"); // RG-Nr-ComboBox bei Zahlungseingänge-Tabelle
+        // Alle Komponenten um Tabelle 'Zahlungeinegaenge' herum:
+        jTextField27.setText(String.valueOf(jTable2.getRowCount())); // Anzahl angezeigter Zeilen
+        Operationen_JTextField.getInstance().refreshen(jTable2, jTextField22, 3); // OffenerBetrag-Spalte summieren
+        Operationen_JComboBox.getInstance().refreshen(jComboBox2, "SELECT * FROM Zahlungsverfolgung ORDER BY Erfassungszeitstempel DESC;", "Rechnungsnummer"); // 
+
+        // Alle Felder um alle Tabellen herum leeren:
         Felder_leeren();
+
 
     }
 
@@ -1826,8 +1991,8 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
      */
     public String standard_ansicht_jTable3 = "SELECT * FROM Zahlungsverfolgung WHERE OffenerBetrag > '0.00' ORDER BY Erfassungszeitstempel DESC;";
     public String letzte_ansicht_jTable3 = "SELECT * FROM Zahlungsverfolgung WHERE OffenerBetrag > '0.00' ORDER BY Erfassungszeitstempel DESC;"; // wird zunächst identisch initialisiert. Wichtig z.B. für Summenanzeigen.
-    public String standard_ansicht_jTable2 = "SELECT * FROM Zahlungsverfolgung_Teilzahlungen;";
-    public String letzte_ansicht_jTable2 = "SELECT * FROM Zahlungsverfolgung_Teilzahlungen;";
+    public String standard_ansicht_jTable2 = "SELECT * FROM Zahlungsverfolgung_Teilzahlungen ORDER BY Erfassungszeitstempel DESC;";
+    public String letzte_ansicht_jTable2 = "SELECT * FROM Zahlungsverfolgung_Teilzahlungen ORDER BY Erfassungszeitstempel DESC;";
     public String standard_ansicht_jTable4 = "SELECT * FROM Zahlungsverfolgung WHERE OffenerBetrag LIKE '0.00' ORDER BY Erfassungszeitstempel DESC;";
     public String letzte_ansicht_jTable4 = "SELECT * FROM Zahlungsverfolgung WHERE OffenerBetrag LIKE '0.00' ORDER BY Erfassungszeitstempel DESC;";
     public String spaltenname_summenfeld_jTextField3 = "Bruttorechnungsbetrag";
@@ -1861,6 +2026,8 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
+    private com.toedter.calendar.JDateChooser jDateChooser5;
+    private com.toedter.calendar.JDateChooser jDateChooser6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1908,7 +2075,7 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     public javax.swing.JScrollPane jScrollPane4;
     public javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
+    public javax.swing.JScrollPane jScrollPane6;
     public javax.swing.JTable jTable2;
     public javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
@@ -1941,12 +2108,17 @@ public class Frame_Zahlungsverfolgung extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
-    static Frame_Zahlungsverfolgung instanz;
+    private static Frame_Zahlungsverfolgung instanz;
 
     public static synchronized Frame_Zahlungsverfolgung getInstance() {
         if (Frame_Zahlungsverfolgung.instanz == null) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    Frame_Zahlungsverfolgung.instanz = new Frame_Zahlungsverfolgung();
+
+                }
+            });
             System.out.println("Frame_Zahlungsverfolgung-Thread erstellt");
-            Frame_Zahlungsverfolgung.instanz = new Frame_Zahlungsverfolgung();
             return Frame_Zahlungsverfolgung.instanz;
         }
 

@@ -53,12 +53,17 @@ public class InputVerifier2Nachkommastellen extends InputVerifier {
         }
     }
 
-    static InputVerifier2Nachkommastellen instanz;
+    private static InputVerifier2Nachkommastellen instanz;
 
     public static synchronized InputVerifier2Nachkommastellen getInstance() {
         if (InputVerifier2Nachkommastellen.instanz == null) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    InputVerifier2Nachkommastellen.instanz = new InputVerifier2Nachkommastellen();
+
+                }
+            });
             System.out.println("InputVerifier2Nachkommastellen-Thread erstellt");
-            InputVerifier2Nachkommastellen.instanz = new InputVerifier2Nachkommastellen();
             return InputVerifier2Nachkommastellen.instanz;
         }
 

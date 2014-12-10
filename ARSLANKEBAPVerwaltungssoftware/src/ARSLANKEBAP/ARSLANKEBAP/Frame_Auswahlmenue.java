@@ -2,28 +2,13 @@ package ARSLANKEBAP;
 
 public class Frame_Auswahlmenue extends javax.swing.JInternalFrame {
 
-    static int openFrameCount = 9;
-    static int xOffset= 30, yOffset= 20;
-
-    
-    
-    /** Creates new form NewJInternalFrame_1 */
+    /**
+     * Creates new form NewJInternalFrame_1
+     */
     public Frame_Auswahlmenue() {
-            initComponents();
-            setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
-            setVisible(true);
-            
-            this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            Desktop.desktopPane.add(this);
-            if(openFrameCount == 9) {
-                openFrameCount = 2;
-            } else {
-                openFrameCount++;
-            }
-            try {
-                this.setSelected(true);
-            } catch (java.beans.PropertyVetoException e) {
-            }
+        initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Wichtig für Threadsicherheit! Beibelassen!
+        Desktop.centerJIF(this); // fuegt JInternalFrame dem Desktop zentriert hinzu etc.
 
     }
 
@@ -306,6 +291,11 @@ public class Frame_Auswahlmenue extends javax.swing.JInternalFrame {
         jButton12.setRolloverEnabled(true);
         jButton12.setSize(new java.awt.Dimension(128, 128));
         jButton12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton12MouseClicked(evt);
+            }
+        });
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -709,8 +699,8 @@ public class Frame_Auswahlmenue extends javax.swing.JInternalFrame {
         });
 
         jButton35.setForeground(java.awt.Color.white);
-        jButton35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/box-512_128.png"))); // NOI18N
-        jButton35.setText("Lagerverwaltung");
+        jButton35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/Settings-5-128.png"))); // NOI18N
+        jButton35.setText("Einstellungen");
         jButton35.setBorderPainted(false);
         jButton35.setContentAreaFilled(false);
         jButton35.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -720,6 +710,11 @@ public class Frame_Auswahlmenue extends javax.swing.JInternalFrame {
         jButton35.setRolloverEnabled(true);
         jButton35.setSize(new java.awt.Dimension(128, 128));
         jButton35.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton35.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton35MouseClicked(evt);
+            }
+        });
         jButton35.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton35ActionPerformed(evt);
@@ -1012,8 +1007,16 @@ public class Frame_Auswahlmenue extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton7MouseClicked
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        this.instanz = null;        // TODO add your handling code here:
+        this.instanz = null;
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void jButton35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton35MouseClicked
+        Frame_Einstellungen.getInstance();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton35MouseClicked
+
+    private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
+        Frame_Kundenverwaltung.getInstance();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12MouseClicked
 
     /* VORSICHT: BITTE ALLE VARIABLEN bzw. OBJEKTE ALS NULL / NICHT INSTANZIERT HIER DEFINIEREN 
      * DAMIT GARBAGECOLLECTOR LÖSCHT, FALLS JINTERNALFRAME-ERSTELLUNG VON MIR TEILWEISE BLOCKIERT WURDE
@@ -1055,14 +1058,21 @@ public class Frame_Auswahlmenue extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     // End of variables declaration//GEN-END:variables
-    static Frame_Auswahlmenue instanz;
+    private static Frame_Auswahlmenue instanz;
+
     public static synchronized Frame_Auswahlmenue getInstance() {
-        if(Frame_Auswahlmenue.instanz == null){
+        if (Frame_Auswahlmenue.instanz == null) {
+            
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    Frame_Auswahlmenue.instanz = new Frame_Auswahlmenue();
+
+                }
+            });
             System.out.println("Frame_Auswahlmenue-Thread erstellt");
-            Frame_Auswahlmenue.instanz = new Frame_Auswahlmenue();
-            return Frame_Auswahlmenue.instanz;            
+            return Frame_Auswahlmenue.instanz;
         }
-    
+
         return Frame_Auswahlmenue.instanz;
     }
 }

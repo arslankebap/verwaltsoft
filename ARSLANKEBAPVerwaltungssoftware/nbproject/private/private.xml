@@ -4,11 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
         <group name="NetBeansProjects">
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Operationen_JTextField.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Frame_Zahlungsverfolgung.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Operationen_MySQL.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Desktop.java</file>
-            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Frame_Auswahlmenue.java</file>
+            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/ReadPropertiesFile.java</file>
+            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/WritePropertiesFile.java</file>
+            <file>file:/Users/SEAMAC/Dropbox/ENES%20WICHTIG/SOFTWARE/verwaltsoft/ARSLANKEBAPVerwaltungssoftware/src/ARSLANKEBAP/ARSLANKEBAP/Frame_Kundenverwaltung.java</file>
         </group>
     </open-files>
 </project-private>

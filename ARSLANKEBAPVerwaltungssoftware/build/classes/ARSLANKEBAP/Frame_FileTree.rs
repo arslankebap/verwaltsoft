@@ -1,3 +1,0 @@
-ARSLANKEBAP.FileSystemModel
-ARSLANKEBAP.FileSystemModel$TreeFile
-ARSLANKEBAP.Frame_FileTree

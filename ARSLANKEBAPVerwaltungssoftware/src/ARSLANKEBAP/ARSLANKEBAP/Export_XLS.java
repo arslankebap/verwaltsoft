@@ -44,11 +44,16 @@ public class Export_XLS {
         wb.write(new FileOutputStream(path.toString()));//Save the file     
     }
     
-        static Export_XLS instanz;
+    private static Export_XLS instanz;
     public static synchronized Export_XLS getInstance() {
         if(Export_XLS.instanz == null){
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    Export_XLS.instanz = new Export_XLS();
+
+                }
+            });
             System.out.println("Export_XLS-Thread erstellt");
-            Export_XLS.instanz = new Export_XLS();
             return Export_XLS.instanz;            
         }
     

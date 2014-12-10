@@ -27,10 +27,12 @@ public class Operationen_JComboBox {
                 jcombobox.addItem(name);
                 
             }
+            resultset.close();
             return jcombobox;
-
+            
 
         } catch (Exception e) {
+            System.out.println("Fehler in JComboBox_Vorlage.");
             JOptionPane.showMessageDialog(null, "Fehler in JComboBox_Vorlage: \n"+e);
             return null;
         }
@@ -58,11 +60,16 @@ public class Operationen_JComboBox {
         }
     }
     
-        static Operationen_JComboBox instanz;
+    private static Operationen_JComboBox instanz;
     public static synchronized Operationen_JComboBox getInstance() {
         if(Operationen_JComboBox.instanz == null){
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    Operationen_JComboBox.instanz = new Operationen_JComboBox();
+
+                }
+            });
             System.out.println("Operationen_JComboBox-Thread erstellt");
-            Operationen_JComboBox.instanz = new Operationen_JComboBox();
             return Operationen_JComboBox.instanz;            
         }
     

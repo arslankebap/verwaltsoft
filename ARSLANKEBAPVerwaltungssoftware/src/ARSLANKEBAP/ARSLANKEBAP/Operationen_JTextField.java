@@ -106,11 +106,16 @@ public class Operationen_JTextField extends JTextField {
         }
     }
     
-    static Operationen_JTextField instanz;
+    private static Operationen_JTextField instanz;
     public static synchronized Operationen_JTextField getInstance() {
         if(Operationen_JTextField.instanz == null){
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    Operationen_JTextField.instanz = new Operationen_JTextField();
+
+                }
+            });
             System.out.println("Operationen_JTextField-Thread erstellt");
-            Operationen_JTextField.instanz = new Operationen_JTextField();
             return Operationen_JTextField.instanz;            
         }
     

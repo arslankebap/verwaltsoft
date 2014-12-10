@@ -106,11 +106,16 @@ public class Operationen_JTable extends JTable {
         return jSPane;
     }
 
-    static Operationen_JTable instanz;
+    private static Operationen_JTable instanz;
     public static synchronized Operationen_JTable getInstance() {
         if(Operationen_JTable.instanz == null){
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    Operationen_JTable.instanz = new Operationen_JTable();
+
+                }
+            });
             System.out.println("Operationen_JTable-Thread erstellt");
-            Operationen_JTable.instanz = new Operationen_JTable();
             return Operationen_JTable.instanz;            
         }
     
